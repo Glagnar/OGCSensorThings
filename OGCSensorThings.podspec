@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "OGCSensorThings"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Easily consume OGCSensortings services."
 
   s.description  = <<-DESC
@@ -16,9 +16,7 @@ A POD that allows SWIFT development of applications that consume OGCSensorthings
 
   s.source       = { :git => "https://github.com/Glagnar/OGCSensorThings.git", :tag => "0.0.1" }
 
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
-
-  s.dependency "remote-controllable"
+  s.source_files = 'Pod/Classes/**/*.swift'
+  s.dependency "Alamofire"
 
 end
