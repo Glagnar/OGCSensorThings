@@ -14,7 +14,7 @@ A POD that allows SWIFT development of applications that consume OGCSensorthings
 
   s.platform     = :ios, "9.0"
 
-  s.source       = { :git => "https://github.com/Glagnar/OGCSensorThings.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/Glagnar/OGCSensorThings.git", :tag => s.version.to_s}
 
   s.source_files = 'Pod/Classes/**/*.swift'
   s.dependency "Alamofire"
