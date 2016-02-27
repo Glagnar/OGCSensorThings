@@ -29,10 +29,10 @@ extension SwaggerClientAPI {
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "orderby": orderby,
-                "top": top,
-                "skip": skip,
-                "filter": filter
+                "$orderby": orderby,
+                "$top": top,
+                "$skip": skip,
+                "$filter": filter
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -59,10 +59,10 @@ extension SwaggerClientAPI {
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "orderby": orderby,
-                "top": top,
-                "skip": skip,
-                "filter": filter
+                "$orderby": orderby,
+                "$top": top,
+                "$skip": skip,
+                "$filter": filter
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -89,10 +89,10 @@ extension SwaggerClientAPI {
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "orderby": orderby,
-                "top": top,
-                "skip": skip,
-                "filter": filter
+                "$orderby": orderby,
+                "$top": top,
+                "$skip": skip,
+                "$filter": filter
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -119,10 +119,10 @@ extension SwaggerClientAPI {
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "orderby": orderby,
-                "top": top,
-                "skip": skip,
-                "filter": filter
+                "$orderby": orderby,
+                "$top": top,
+                "$skip": skip,
+                "$filter": filter
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -149,10 +149,10 @@ extension SwaggerClientAPI {
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "orderby": orderby,
-                "top": top,
-                "skip": skip,
-                "filter": filter
+                "$orderby": orderby,
+                "$top": top,
+                "$skip": skip,
+                "$filter": filter
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -179,10 +179,10 @@ extension SwaggerClientAPI {
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "orderby": orderby,
-                "top": top,
-                "skip": skip,
-                "filter": filter
+                "$orderby": orderby,
+                "$top": top,
+                "$skip": skip,
+                "$filter": filter
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
@@ -209,10 +209,10 @@ extension SwaggerClientAPI {
             let URLString = SwaggerClientAPI.basePath + path
             
             let nillableParameters: [String:AnyObject?] = [
-                "orderby": orderby,
-                "top": top,
-                "skip": skip,
-                "filter": filter
+                "$orderby": orderby,
+                "$top": top,
+                "$skip": skip,
+                "$filter": filter
             ]
             let parameters = APIHelper.rejectNil(nillableParameters)
 
