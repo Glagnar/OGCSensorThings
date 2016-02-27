@@ -11,16 +11,16 @@ import Foundation
 public class Sensor: JSONEncodable {
 
     /** The detailed description of the sensor or system. The content is open to accommodate changes to SensorML or to support other description languages. */
-    public var Metadata: String?
+    public var metadata: String?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
-    public var SelfLink: String?
+    public var selfLink: String?
     /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var NavigationLink: String?
+    public var navigationLink: String?
     /** Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links. */
-    public var AssociationLink: String?
+    public var associationLink: String?
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var ID: String?
-    public var Observations: [Observation]?
+    public var observations: [Observation]?
     
 
     public init() {}
@@ -28,12 +28,12 @@ public class Sensor: JSONEncodable {
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["Metadata"] = self.Metadata
-        nillableDictionary["SelfLink"] = self.SelfLink
-        nillableDictionary["NavigationLink"] = self.NavigationLink
-        nillableDictionary["AssociationLink"] = self.AssociationLink
+        nillableDictionary["metadata"] = self.metadata
+        nillableDictionary["selfLink"] = self.selfLink
+        nillableDictionary["navigationLink"] = self.navigationLink
+        nillableDictionary["associationLink"] = self.associationLink
         nillableDictionary["ID"] = self.ID
-        nillableDictionary["Observations"] = self.Observations?.encodeToJSON()
+        nillableDictionary["observations"] = self.observations?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

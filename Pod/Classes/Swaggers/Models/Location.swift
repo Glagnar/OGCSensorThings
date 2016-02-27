@@ -11,16 +11,16 @@ import Foundation
 public class Location: JSONEncodable {
 
     /** The absolute geographical position of the location. This is generally the GeoJSON geometry object. */
-    public var Geometry: String?
+    public var geometry: String?
     /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var NavigationLink: String?
+    public var navigationLink: String?
     /** Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links. */
-    public var AssociationLink: String?
-    public var Things: [Thing]?
+    public var associationLink: String?
+    public var things: [Thing]?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
-    public var SelfLink: String?
+    public var selfLink: String?
     /** The time point/period of the location. */
-    public var Time: NSDate?
+    public var time: NSDate?
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var ID: String?
     
@@ -30,12 +30,12 @@ public class Location: JSONEncodable {
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["Geometry"] = self.Geometry
-        nillableDictionary["NavigationLink"] = self.NavigationLink
-        nillableDictionary["AssociationLink"] = self.AssociationLink
-        nillableDictionary["Things"] = self.Things?.encodeToJSON()
-        nillableDictionary["SelfLink"] = self.SelfLink
-        nillableDictionary["Time"] = self.Time?.encodeToJSON()
+        nillableDictionary["geometry"] = self.geometry
+        nillableDictionary["navigationLink"] = self.navigationLink
+        nillableDictionary["associationLink"] = self.associationLink
+        nillableDictionary["things"] = self.things?.encodeToJSON()
+        nillableDictionary["selfLink"] = self.selfLink
+        nillableDictionary["time"] = self.time?.encodeToJSON()
         nillableDictionary["ID"] = self.ID
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary

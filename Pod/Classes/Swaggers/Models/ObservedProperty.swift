@@ -11,14 +11,14 @@ import Foundation
 public class ObservedProperty: JSONEncodable {
 
     /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var NavigationLink: String?
+    public var navigationLink: String?
     /** Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links. */
-    public var AssociationLink: String?
+    public var associationLink: String?
     /** The unit of measurement for the observations measuring this observedProperty. */
-    public var UnitOfMeasurement: String?
-    public var Datastreams: [Datastream]?
+    public var unitOfMeasurement: String?
+    public var datastreams: [Datastream]?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
-    public var SelfLink: String?
+    public var selfLink: String?
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var ID: String?
     /** The URI of the observedProperty/phenomenon. */
@@ -30,11 +30,11 @@ public class ObservedProperty: JSONEncodable {
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["NavigationLink"] = self.NavigationLink
-        nillableDictionary["AssociationLink"] = self.AssociationLink
-        nillableDictionary["UnitOfMeasurement"] = self.UnitOfMeasurement
-        nillableDictionary["Datastreams"] = self.Datastreams?.encodeToJSON()
-        nillableDictionary["SelfLink"] = self.SelfLink
+        nillableDictionary["navigationLink"] = self.navigationLink
+        nillableDictionary["associationLink"] = self.associationLink
+        nillableDictionary["unitOfMeasurement"] = self.unitOfMeasurement
+        nillableDictionary["datastreams"] = self.datastreams?.encodeToJSON()
+        nillableDictionary["selfLink"] = self.selfLink
         nillableDictionary["ID"] = self.ID
         nillableDictionary["URI"] = self.URI
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]

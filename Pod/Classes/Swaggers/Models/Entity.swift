@@ -13,11 +13,11 @@ public class Entity: JSONEncodable {
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var ID: String?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
-    public var SelfLink: String?
+    public var selfLink: String?
     /** Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links. */
-    public var AssociationLink: String?
+    public var associationLink: String?
     /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var NavigationLink: String?
+    public var navigationLink: String?
     
 
     public init() {}
@@ -26,9 +26,9 @@ public class Entity: JSONEncodable {
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["ID"] = self.ID
-        nillableDictionary["SelfLink"] = self.SelfLink
-        nillableDictionary["AssociationLink"] = self.AssociationLink
-        nillableDictionary["NavigationLink"] = self.NavigationLink
+        nillableDictionary["selfLink"] = self.selfLink
+        nillableDictionary["associationLink"] = self.associationLink
+        nillableDictionary["navigationLink"] = self.navigationLink
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

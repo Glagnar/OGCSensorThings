@@ -10,23 +10,23 @@ import Foundation
 
 public class Observation: JSONEncodable {
 
-    public var Datastream: Datastream?
+    public var datastream: Datastream?
     /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var NavigationLink: String?
+    public var navigationLink: String?
     /** Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links. */
-    public var AssociationLink: String?
-    public var FeatureOfInterest: FeatureOfInterest?
+    public var associationLink: String?
+    public var featureOfInterest: FeatureOfInterest?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
-    public var SelfLink: String?
+    public var selfLink: String?
     /** The time point/period of when the observation happens. */
-    public var PhenomenonTime: NSDate?
+    public var phenomenonTime: NSDate?
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var ID: String?
     /** The data type of the ResultValue. Service should by default set the ResultType as Measure unless users specify a different ResultType when creating an observation. */
-    public var ResultType: String?
+    public var resultType: String?
     /** The estimated value of an observedProperty from the observation. */
-    public var ResultValue: String?
-    public var Sensor: Sensor?
+    public var resultValue: String?
+    public var sensor: Sensor?
     
 
     public init() {}
@@ -34,16 +34,16 @@ public class Observation: JSONEncodable {
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["Datastream"] = self.Datastream?.encodeToJSON()
-        nillableDictionary["NavigationLink"] = self.NavigationLink
-        nillableDictionary["AssociationLink"] = self.AssociationLink
-        nillableDictionary["FeatureOfInterest"] = self.FeatureOfInterest?.encodeToJSON()
-        nillableDictionary["SelfLink"] = self.SelfLink
-        nillableDictionary["PhenomenonTime"] = self.PhenomenonTime?.encodeToJSON()
+        nillableDictionary["datastream"] = self.datastream?.encodeToJSON()
+        nillableDictionary["navigationLink"] = self.navigationLink
+        nillableDictionary["associationLink"] = self.associationLink
+        nillableDictionary["featureOfInterest"] = self.featureOfInterest?.encodeToJSON()
+        nillableDictionary["selfLink"] = self.selfLink
+        nillableDictionary["phenomenonTime"] = self.phenomenonTime?.encodeToJSON()
         nillableDictionary["ID"] = self.ID
-        nillableDictionary["ResultType"] = self.ResultType
-        nillableDictionary["ResultValue"] = self.ResultValue
-        nillableDictionary["Sensor"] = self.Sensor?.encodeToJSON()
+        nillableDictionary["resultType"] = self.resultType
+        nillableDictionary["resultValue"] = self.resultValue
+        nillableDictionary["sensor"] = self.sensor?.encodeToJSON()
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }
