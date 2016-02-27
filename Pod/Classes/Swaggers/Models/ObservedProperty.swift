@@ -11,14 +11,14 @@ import Foundation
 public class ObservedProperty: JSONEncodable {
 
     /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var Navigation-Link: String?
+    public var NavigationLink: String?
     /** Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links. */
-    public var Association-Link: String?
+    public var AssociationLink: String?
     /** The unit of measurement for the observations measuring this observedProperty. */
     public var UnitOfMeasurement: String?
     public var Datastreams: [Datastream]?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
-    public var Self-link: String?
+    public var SelfLink: String?
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var ID: String?
     /** The URI of the observedProperty/phenomenon. */
@@ -30,11 +30,11 @@ public class ObservedProperty: JSONEncodable {
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["Navigation-Link"] = self.Navigation-Link
-        nillableDictionary["Association-Link"] = self.Association-Link
+        nillableDictionary["NavigationLink"] = self.NavigationLink
+        nillableDictionary["AssociationLink"] = self.AssociationLink
         nillableDictionary["UnitOfMeasurement"] = self.UnitOfMeasurement
         nillableDictionary["Datastreams"] = self.Datastreams?.encodeToJSON()
-        nillableDictionary["Self-link"] = self.Self-link
+        nillableDictionary["SelfLink"] = self.SelfLink
         nillableDictionary["ID"] = self.ID
         nillableDictionary["URI"] = self.URI
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]

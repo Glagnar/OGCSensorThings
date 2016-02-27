@@ -13,12 +13,12 @@ public class Location: JSONEncodable {
     /** The absolute geographical position of the location. This is generally the GeoJSON geometry object. */
     public var Geometry: String?
     /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var Navigation-Link: String?
+    public var NavigationLink: String?
     /** Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links. */
-    public var Association-Link: String?
+    public var AssociationLink: String?
     public var Things: [Thing]?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
-    public var Self-link: String?
+    public var SelfLink: String?
     /** The time point/period of the location. */
     public var Time: NSDate?
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
@@ -31,10 +31,10 @@ public class Location: JSONEncodable {
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["Geometry"] = self.Geometry
-        nillableDictionary["Navigation-Link"] = self.Navigation-Link
-        nillableDictionary["Association-Link"] = self.Association-Link
+        nillableDictionary["NavigationLink"] = self.NavigationLink
+        nillableDictionary["AssociationLink"] = self.AssociationLink
         nillableDictionary["Things"] = self.Things?.encodeToJSON()
-        nillableDictionary["Self-link"] = self.Self-link
+        nillableDictionary["SelfLink"] = self.SelfLink
         nillableDictionary["Time"] = self.Time?.encodeToJSON()
         nillableDictionary["ID"] = self.ID
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]

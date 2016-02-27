@@ -109,14 +109,40 @@ class Decoders {
             }
             // Decoder for NSDate
             Decoders.addDecoder(clazz: NSDate.self) { (source: AnyObject) -> NSDate in
-                let sourceString = source as! String
-                for formatter in formatters {
-                    if let date = formatter.dateFromString(sourceString) {
-                        return date
+               if let sourceString = source as? String {
+                    for formatter in formatters {
+                        if let date = formatter.dateFromString(sourceString) {
+                            return date
+                        }
                     }
+                
                 }
-                fatalError("formatter failed to parse \(sourceString)")
+                if let sourceInt = source as? Int {
+                    // treat as a java date
+                    return NSDate(timeIntervalSince1970: Double(sourceInt / 1000) )
+                }
+                fatalError("formatter failed to parse \(source)")
             } 
+
+			// Decoder for [Datastream]
+            Decoders.addDecoder(clazz: [Datastream].self) { (source: AnyObject) -> [Datastream] in
+                return Decoders.decode(clazz: [Datastream].self, source: source)
+            }
+			// Decoder for Datastream
+            Decoders.addDecoder(clazz: Datastream.self) { (source: AnyObject) -> Datastream in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Datastream()
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
+                instance.Description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Description"])
+                instance.ObservedProperty = Decoders.decodeOptional(clazz: ObservedProperty.self, source: sourceDictionary["ObservedProperty"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
+                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
+                instance.Observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
+                instance.Thing = Decoders.decodeOptional(clazz: Thing.self, source: sourceDictionary["Thing"])
+                return instance
+            }
+			
 
 			// Decoder for [Entity]
             Decoders.addDecoder(clazz: [Entity].self) { (source: AnyObject) -> [Entity] in
@@ -127,9 +153,69 @@ class Decoders {
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Entity()
                 instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                return instance
+            }
+			
+
+			// Decoder for [ObservedProperty]
+            Decoders.addDecoder(clazz: [ObservedProperty].self) { (source: AnyObject) -> [ObservedProperty] in
+                return Decoders.decode(clazz: [ObservedProperty].self, source: source)
+            }
+			// Decoder for ObservedProperty
+            Decoders.addDecoder(clazz: ObservedProperty.self) { (source: AnyObject) -> ObservedProperty in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = ObservedProperty()
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
+                instance.UnitOfMeasurement = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["UnitOfMeasurement"])
+                instance.Datastreams = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Datastreams"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
+                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
+                instance.URI = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["URI"])
+                return instance
+            }
+			
+
+			// Decoder for [FeatureOfInterest]
+            Decoders.addDecoder(clazz: [FeatureOfInterest].self) { (source: AnyObject) -> [FeatureOfInterest] in
+                return Decoders.decode(clazz: [FeatureOfInterest].self, source: source)
+            }
+			// Decoder for FeatureOfInterest
+            Decoders.addDecoder(clazz: FeatureOfInterest.self) { (source: AnyObject) -> FeatureOfInterest in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = FeatureOfInterest()
+                instance.Geometry = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Geometry"])
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
+                instance.Description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Description"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
+                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
+                instance.Observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
+                return instance
+            }
+			
+
+			// Decoder for [Observation]
+            Decoders.addDecoder(clazz: [Observation].self) { (source: AnyObject) -> [Observation] in
+                return Decoders.decode(clazz: [Observation].self, source: source)
+            }
+			// Decoder for Observation
+            Decoders.addDecoder(clazz: Observation.self) { (source: AnyObject) -> Observation in
+                let sourceDictionary = source as! [NSObject:AnyObject]
+                let instance = Observation()
+                instance.Datastream = Decoders.decodeOptional(clazz: Datastream.self, source: sourceDictionary["Datastream"])
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
+                instance.FeatureOfInterest = Decoders.decodeOptional(clazz: FeatureOfInterest.self, source: sourceDictionary["FeatureOfInterest"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
+                instance.PhenomenonTime = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["PhenomenonTime"])
+                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
+                instance.ResultType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ResultType"])
+                instance.ResultValue = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ResultValue"])
+                instance.Sensor = Decoders.decodeOptional(clazz: Sensor.self, source: sourceDictionary["Sensor"])
                 return instance
             }
 			
@@ -142,12 +228,12 @@ class Decoders {
             Decoders.addDecoder(clazz: Thing.self) { (source: AnyObject) -> Thing in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Thing()
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
                 instance.Description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Description"])
                 instance.Datastreams = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Datastreams"])
                 instance.Locations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Locations"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
                 instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
                 return instance
             }
@@ -162,73 +248,12 @@ class Decoders {
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Location()
                 instance.Geometry = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Geometry"])
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
                 instance.Things = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Things"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
                 instance.Time = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["Time"])
                 instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
-                return instance
-            }
-			
-
-			// Decoder for [Datastream]
-            Decoders.addDecoder(clazz: [Datastream].self) { (source: AnyObject) -> [Datastream] in
-                return Decoders.decode(clazz: [Datastream].self, source: source)
-            }
-			// Decoder for Datastream
-            Decoders.addDecoder(clazz: Datastream.self) { (source: AnyObject) -> Datastream in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Datastream()
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
-                instance.Description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Description"])
-                instance.ObservedProperty = Decoders.decodeOptional(clazz: ObservedProperty.self, source: sourceDictionary["ObservedProperty"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
-                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
-                instance.Observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
-                instance.Thing = Decoders.decodeOptional(clazz: Thing.self, source: sourceDictionary["Thing"])
-                return instance
-            }
-			
-
-			// Decoder for [ObservedProperty]
-            Decoders.addDecoder(clazz: [ObservedProperty].self) { (source: AnyObject) -> [ObservedProperty] in
-                return Decoders.decode(clazz: [ObservedProperty].self, source: source)
-            }
-			// Decoder for ObservedProperty
-            Decoders.addDecoder(clazz: ObservedProperty.self) { (source: AnyObject) -> ObservedProperty in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = ObservedProperty()
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
-                instance.UnitOfMeasurement = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["UnitOfMeasurement"])
-                instance.Datastreams = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Datastreams"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
-                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
-                instance.URI = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["URI"])
-                return instance
-            }
-			
-
-			// Decoder for [Observation]
-            Decoders.addDecoder(clazz: [Observation].self) { (source: AnyObject) -> [Observation] in
-                return Decoders.decode(clazz: [Observation].self, source: source)
-            }
-			// Decoder for Observation
-            Decoders.addDecoder(clazz: Observation.self) { (source: AnyObject) -> Observation in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = Observation()
-                instance.Datastream = Decoders.decodeOptional(clazz: Datastream.self, source: sourceDictionary["Datastream"])
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
-                instance.FeatureOfInterest = Decoders.decodeOptional(clazz: FeatureOfInterest.self, source: sourceDictionary["FeatureOfInterest"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
-                instance.phenomenonTime = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["phenomenonTime"])
-                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
-                instance.ResultType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ResultType"])
-                instance.ResultValue = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ResultValue"])
-                instance.Sensor = Decoders.decodeOptional(clazz: Sensor.self, source: sourceDictionary["Sensor"])
                 return instance
             }
 			
@@ -242,28 +267,9 @@ class Decoders {
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Sensor()
                 instance.Metadata = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Metadata"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
-                instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
-                instance.Observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
-                return instance
-            }
-			
-
-			// Decoder for [FeatureOfInterest]
-            Decoders.addDecoder(clazz: [FeatureOfInterest].self) { (source: AnyObject) -> [FeatureOfInterest] in
-                return Decoders.decode(clazz: [FeatureOfInterest].self, source: source)
-            }
-			// Decoder for FeatureOfInterest
-            Decoders.addDecoder(clazz: FeatureOfInterest.self) { (source: AnyObject) -> FeatureOfInterest in
-                let sourceDictionary = source as! [NSObject:AnyObject]
-                let instance = FeatureOfInterest()
-                instance.Geometry = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Geometry"])
-                instance.Navigation-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Navigation-Link"])
-                instance.Association-Link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Association-Link"])
-                instance.Description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Description"])
-                instance.Self-link = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Self-link"])
+                instance.SelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["SelfLink"])
+                instance.NavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["NavigationLink"])
+                instance.AssociationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["AssociationLink"])
                 instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
                 instance.Observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
                 return instance
