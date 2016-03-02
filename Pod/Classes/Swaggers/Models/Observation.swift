@@ -19,7 +19,7 @@ public class Observation: JSONEncodable {
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
     public var selfLink: String?
     /** The time point/period of when the observation happens. */
-    public var phenomenonTime: NSDate?
+    public var time: NSDate?
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var ID: String?
     /** The data type of the ResultValue. Service should by default set the ResultType as Measure unless users specify a different ResultType when creating an observation. */
@@ -39,7 +39,7 @@ public class Observation: JSONEncodable {
         nillableDictionary["associationLink"] = self.associationLink
         nillableDictionary["featureOfInterest"] = self.featureOfInterest?.encodeToJSON()
         nillableDictionary["selfLink"] = self.selfLink
-        nillableDictionary["phenomenonTime"] = self.phenomenonTime?.encodeToJSON()
+        nillableDictionary["time"] = self.time?.encodeToJSON()
         nillableDictionary["ID"] = self.ID
         nillableDictionary["resultType"] = self.resultType
         nillableDictionary["resultValue"] = self.resultValue

@@ -3,7 +3,7 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.0.1"
+  version: "0.0.2"
   title: ALMANAC Cloud API
 
 # Describe your paths here
@@ -53,6 +53,20 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/Thing"
+    post:
+      description: Posts a new Thing description
+      parameters:
+      -
+        name: thing
+        description : The Thing to add
+        schema:
+            "$ref" : "#/definitions/Thing"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
 
   /Observations:
     get:
@@ -92,6 +106,21 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/Observation"
+    post:
+      description: Posts a new obervation pertaining to a given data stream
+      parameters:
+      -
+        name: observation
+        description : The Observation to add
+        schema:
+            "$ref" : "#/definitions/Observation"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
+          
   /Datastreams:
     get:
       description: Gets Datastreams, i.e., collections of observations that are related in some way. The one constraint is that the observations in a datastream must measure the same observed property (i.e., one phenomenon). 
@@ -129,6 +158,20 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/Datastream"
+    post:
+      description: Posts a new DataStream definition
+      parameters:
+      -
+        name: datastream
+        description : The Datastream to add
+        schema:
+            "$ref" : "#/definitions/Datastream"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
   /ObservedProperties:
     get:
       description: Gets ObservedProprties, i.e., the phenomenon of a given observation.
@@ -166,6 +209,20 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/ObservedProperty"
+    post:
+      description: Posts a new ObservedPropertyy
+      parameters:
+      -
+        name: observedProperty
+        description : The ObservedProperty to add
+        schema:
+            "$ref" : "#/definitions/ObservedProperty"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
   /Locations:
     get:
       description: Gets Locations, i.e., registered absolute geographical position at a specific time point.
@@ -203,6 +260,20 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/Location"
+    post:
+      description: Posts a new Location definition
+      parameters:
+      -
+        name: location
+        description : The Location to add
+        schema:
+            "$ref" : "#/definitions/Location"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
   /Sensors:
     get:
       description: Gets available Sensors, i.e., instruments that can observe a property or phenomenon with the goal of producing an estimate of the value of the property. In some cases,  sensor in this data model can also be seen as the procedure (method, algorithm, or instrument) defined in OGC 07-022r1.
@@ -239,7 +310,21 @@ paths:
           schema:
             type: array
             items:
-              "$ref": "#/definitions/FeatureOfInterest"
+              "$ref": "#/definitions/Sensor"
+    post:
+      description: Posts a new sensor description
+      parameters:
+      -
+        name: sensor
+        description : The Observation to add
+        schema:
+            "$ref" : "#/definitions/Sensor"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
   /FeatureOfInterests:
     get:
       description: Gets Features or feature collections that represent the identifiable object(s) on which the sensor systems are making observations. In the case of an in-situ sensor or observations being attributes of the thing, the feature of interest could be the thing itself. For remote sensors, this may be the geographical area or volume that is being sensed.
@@ -277,6 +362,20 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/FeatureOfInterest"
+    post:
+      description: Posts a new Feature of Interest description
+      parameters:
+      -
+        name: featureOfInterest
+        description : The FeatureOfInterest to add
+        schema:
+            "$ref" : "#/definitions/FeatureOfInterest"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
 definitions:
   #--- OGC Sensor Things API definitions ---#      
   Entity:
@@ -363,7 +462,7 @@ definitions:
         
   Observation:
     required:
-      - phenomenonTime
+      - Time
       - ResultType
       - ResultValue
       
@@ -371,7 +470,7 @@ definitions:
     allOf:
       - "$ref": "#/definitions/Entity"
       - properties:
-          phenomenonTime:
+          Time:
             type: string
             format: date
             description: The time point/period of when the observation happens.

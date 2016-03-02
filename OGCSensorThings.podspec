@@ -1,11 +1,12 @@
 Pod::Spec.new do |s|
 
   s.name         = "OGCSensorThings"
-  s.version      = "0.0.6"
-  s.summary      = "Easily consume OGCSensortings services."
+  s.version      = "0.0.7"
+  s.summary      = "Easily consume OGCSensorThings services."
 
   s.description  = <<-DESC
-A POD that allows SWIFT development of applications that consume OGCSensorthings services.
+A POD that allows Swift development of applications that consume OGCSensorthings services.
+This POD is made possible through the efforts of Dario Bonino, and funded by the EU FP7 Framework.
                    DESC
 
   s.homepage     = "http://www.almanac-project.eu"

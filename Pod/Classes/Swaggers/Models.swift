@@ -211,7 +211,7 @@ class Decoders {
                 instance.associationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["associationLink"])
                 instance.featureOfInterest = Decoders.decodeOptional(clazz: FeatureOfInterest.self, source: sourceDictionary["featureOfInterest"])
                 instance.selfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["selfLink"])
-                instance.phenomenonTime = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["phenomenonTime"])
+                instance.time = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["time"])
                 instance.ID = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["ID"])
                 instance.resultType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["resultType"])
                 instance.resultValue = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["resultValue"])

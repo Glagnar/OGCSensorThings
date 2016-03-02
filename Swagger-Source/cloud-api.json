@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.0.1",
+        "version": "0.0.2",
         "title": "ALMANAC Cloud API"
     },
     "paths": {
@@ -47,6 +47,25 @@
                                 "$ref": "#/definitions/Thing"
                             }
                         }
+                    }
+                }
+            },
+            "post": {
+                "description": "Posts a new Thing description",
+                "parameters": [
+                    {
+                        "name": "thing",
+                        "description": "The Thing to add",
+                        "schema": {
+                            "$ref": "#/definitions/Thing"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful response"
                     }
                 }
             }
@@ -95,6 +114,25 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Posts a new obervation pertaining to a given data stream",
+                "parameters": [
+                    {
+                        "name": "observation",
+                        "description": "The Observation to add",
+                        "schema": {
+                            "$ref": "#/definitions/Observation"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful response"
+                    }
+                }
             }
         },
         "/Datastreams": {
@@ -139,6 +177,25 @@
                                 "$ref": "#/definitions/Datastream"
                             }
                         }
+                    }
+                }
+            },
+            "post": {
+                "description": "Posts a new DataStream definition",
+                "parameters": [
+                    {
+                        "name": "datastream",
+                        "description": "The Datastream to add",
+                        "schema": {
+                            "$ref": "#/definitions/Datastream"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful response"
                     }
                 }
             }
@@ -187,6 +244,25 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Posts a new ObservedPropertyy",
+                "parameters": [
+                    {
+                        "name": "observedProperty",
+                        "description": "The ObservedProperty to add",
+                        "schema": {
+                            "$ref": "#/definitions/ObservedProperty"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful response"
+                    }
+                }
             }
         },
         "/Locations": {
@@ -233,6 +309,25 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Posts a new Location definition",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "description": "The Location to add",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful response"
+                    }
+                }
             }
         },
         "/Sensors": {
@@ -274,9 +369,28 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/FeatureOfInterest"
+                                "$ref": "#/definitions/Sensor"
                             }
                         }
+                    }
+                }
+            },
+            "post": {
+                "description": "Posts a new sensor description",
+                "parameters": [
+                    {
+                        "name": "sensor",
+                        "description": "The Observation to add",
+                        "schema": {
+                            "$ref": "#/definitions/Sensor"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful response"
                     }
                 }
             }
@@ -323,6 +437,25 @@
                                 "$ref": "#/definitions/FeatureOfInterest"
                             }
                         }
+                    }
+                }
+            },
+            "post": {
+                "description": "Posts a new Feature of Interest description",
+                "parameters": [
+                    {
+                        "name": "featureOfInterest",
+                        "description": "The FeatureOfInterest to add",
+                        "schema": {
+                            "$ref": "#/definitions/FeatureOfInterest"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful response"
                     }
                 }
             }
@@ -465,7 +598,7 @@
         },
         "Observation": {
             "required": [
-                "phenomenonTime",
+                "Time",
                 "ResultType",
                 "ResultValue"
             ],
@@ -476,7 +609,7 @@
                 },
                 {
                     "properties": {
-                        "phenomenonTime": {
+                        "Time": {
                             "type": "string",
                             "format": "date",
                             "description": "The time point/period of when the observation happens."
