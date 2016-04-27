@@ -50,9 +50,7 @@ paths:
           # A schema describing your response object.
           # Use JSON Schema format
           schema:
-            type: array
-            items:
-              "$ref": "#/definitions/Thing"
+              "$ref": "#/definitions/ThingsResponse"
     post:
       description: Posts a new Thing description
       parameters:
@@ -103,9 +101,7 @@ paths:
         200:
           description: "successful response"
           schema:
-            type: array
-            items:
-              "$ref": "#/definitions/Observation"
+            "$ref": "#/definitions/ObservationsResponse"
     post:
       description: Posts a new obervation pertaining to a given data stream
       parameters:
@@ -155,9 +151,7 @@ paths:
         200:
           description: "successful response"
           schema:
-            type: array
-            items:
-              "$ref": "#/definitions/Datastream"
+            "$ref": "#/definitions/DatastreamsResponse"
     post:
       description: Posts a new DataStream definition
       parameters:
@@ -206,9 +200,7 @@ paths:
         200:
           description: "successful response"
           schema:
-            type: array
-            items:
-              "$ref": "#/definitions/ObservedProperty"
+            "$ref": "#/definitions/ObservedPropertiesResponse"
     post:
       description: Posts a new ObservedPropertyy
       parameters:
@@ -257,9 +249,7 @@ paths:
         200:
           description: "successful response"
           schema:
-            type: array
-            items:
-              "$ref": "#/definitions/Location"
+            "$ref": "#/definitions/LocationsResponse"
     post:
       description: Posts a new Location definition
       parameters:
@@ -308,9 +298,7 @@ paths:
         200:
           description: "successful response"
           schema:
-            type: array
-            items:
-              "$ref": "#/definitions/Sensor"
+            "$ref": "#/definitions/SensorsResponse"
     post:
       description: Posts a new sensor description
       parameters:
@@ -359,9 +347,7 @@ paths:
         200:
           description: "successful response"
           schema:
-            type: array
-            items:
-              "$ref": "#/definitions/FeatureOfInterest"
+            "$ref": "#/definitions/FeatureOfInterestsResponse"
     post:
       description: Posts a new Feature of Interest description
       parameters:
@@ -376,140 +362,409 @@ paths:
       responses:
         200:
           description : "successful response"
+          
+  /HistoricalLocations:
+    get:
+      description: "Gets Historic Locations of a Thing. A Thing’s HistoricalLocation entity set provides the current (i.e., last known) and previous locations of the Thing with their time."
+
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: $orderby
+          in: query
+          description: "The <strong>$orderby</strong> query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the <strong>$orderby</strong> query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.<br/><br/>The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. <br/><br/>Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.<br/><ul><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby=ResultValue</address> returns all Observations ordered by the ResultValue property in ascending order.</li><li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby=Datastreams/ID%20desc,Time</address> returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.</li></ul>"
+          required: false
+          type: string
+        -
+          name: $top
+          in: query
+          description: "The <strong>$top</strong> query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.<br/>Usually, the <strong>$top</strong> query option is used with the <strong>$orderby</strong> query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.<br/>In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the <strong>$top</strong> query option should be discarded and the pagination limitation should be imposed."
+          required: false
+          type: integer
+        -
+          name: $skip
+          in: query
+          description: "The <strong>$skip</strong> query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.<br/>Usually, the <strong>$skip</strong> query option is used with the <strong>$orderby</strong> query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.<br/>Where <strong>$top</strong> and <strong>$skip</strong> are used together, the <strong>$skip</strong> must be applied before the <strong>$top</strong>, regardless of the order in which they appear in the request.<br/><ul><li><strong>Example 1:</strong><address> http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip=5</address> returns Product entities starting with the sixth Product entity in the Products collection.</li><li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip=2&$top=2&$orderby=Time</address> returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.</li></ul>"
+          required: false
+          type: integer
+        -
+          name: $filter
+          in: query
+          description: "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations"
+          required: false 
+          type: integer
+      responses:
+        200:
+          description: "successful response"
+          schema:
+            "$ref": "#/definitions/HistoricalLocationsResponse"
+    post:
+      description: Posts a new HistoricLocation description
+      parameters:
+      -
+        name: historicLocation
+        description : The HistoricalLocation to add
+        schema:
+            "$ref" : "#/definitions/HistoricalLocation"
+        in: body
+        required : true
+      
+      responses:
+        200:
+          description : "successful response"
 definitions:
-  #--- OGC Sensor Things API definitions ---#      
-  Entity:
+  #--- OGC Sensor Things API definitions ---#   
+   #--------- Thing ------ #
+  Thing:
     properties:
-      ID:
+      "@iot.id":
         type: string
         description: ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type.
-      Self-link:
+      "@iot.selLink":
         type: string
         description: Self-Link is the absolute URL of an entity which is unique among all other entities. 
-      Association-Link:
+      "description":
         type: string
-        description: Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links.
-      Navigation-Link:
-        type: string
-        description: Navigation-Link is the relative URL that retrives content of related entities.
-    required:
-      - ID
-  Thing:
-    allOf:
-      - "$ref": "#/definitions/Entity"
-      - properties:
-          Description:
-              type: string
-              description: This is the description of the thing entity. The content is open to accommodate changes to SensorML and to support other description languages.
-          Locations:
-            description: A thing can locate at different geographical positions at different time points (multiple locations). Multiple things can locate at the same location at the same time. A thing may not have a location.
-            type: array
-            items:
+        description: This is the description of the thing entity. The content is open to accommodate changes to SensorML and to support other description languages.
+      "properties":
+        type: object
+        description: a set of additional properties specified for the object in the form "name":"value" pair
+      Locations:
+        description: "The Location entity locates the Thing. Multiple Things MAY be located at the same Location. A Thing MAY not have a Location. A Thing SHOULD have only one Location. However, in some complex use cases, a Thing MAY have more than one Location representations. In such case, the Thing MAY have more than one Locations. These Locations SHALL have different encodingTypes and the encodingTypes SHOULD be in different spaces (e.g., one encodingType in Geometrical space and one encodingType in Topological space). (many-to-many)"
+        type: array
+        items:
                 "$ref": "#/definitions/Location"
-          Datastreams:
-            description: A thing can have zero-to-many datastreams. A datastream entity can only link to a thing as a collection of observations or properties.
-            type: array
-            items:
+      HistoricalLocations:
+        description: "A Thing has zero-to-many HistoricalLocations. A HistoricalLocation has one-and-only-one Thing"
+        type: array
+        items:
+                "$ref": "#/definitions/HistoricalLocation"
+      Datastreams:
+        description: A thing MAY have zero-to-many datastreams."
+        type: array
+        items:
                 "$ref": "#/definitions/Datastream"
+      "HistoricalLocations@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "Datastreams@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "Locations@iot.navigationLink":
+        type: string
+        description: link to related entities
+    required:
+      - "description"
+                
+  #--------- Location ------ #
   Location:
-    allOf:
-      - "$ref": "#/definitions/Entity"
-      - properties:
-          Time:
-            type: string
-            format: date
-            description: The time point/period of the location.
-          Geometry:
-            type: string
-            description: The absolute geographical position of the location. This is generally the GeoJSON geometry object.
-          Things:
-            type: array
-            items:
-              "$ref": "#/definitions/Thing"
+    properties:
+      "@iot.id":
+        type: string
+        description: ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type.
+      "@iot.selLink":
+        type: string
+        description: Self-Link is the absolute URL of an entity which is unique among all other entities. 
+      "description":
+        type: string
+        description: This is the description of the thing entity. The content is open to accommodate changes to SensorML and to support other description languages.
+      "encodingType":
+        type: string
+        description: "The encoding type of the location property. Its value is one of the ValueCode enumeration (see Table 8-6; currently only  application/vnd.geo+json  is supported)."
+      "location":
+        type: object
+        description: "The location type is defined by encodingType. (only GeoJSON is supported)"
+      Things:
+        description: "Multiple Things MAY locate at the same Location . A Thing MAY not have a Location."
+        type: array
+        items:
+          "$ref": "#/definitions/Thing"
+      HistoricalLocations:
+        description: "A Location can have zero-to-many HistoricalLocations . One HistoricalLocation SHALL have one or many Locations."
+        type: array
+        items:
+                "$ref": "#/definitions/HistoricalLocation"
+      "Things@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "HistoricalLocations@iot.navigationLink":
+        type: string
+        description: link to related entities
+
+  #-------- Historical Location -----#
+  HistoricalLocation:
+    properties:
+      "@iot.id":
+        type: string
+        description: ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type.
+      "@iot.selLink":
+        type: string
+        description: Self-Link is the absolute URL of an entity which is unique among all other entities. 
+      "time":
+        type: string
+        description : "The time when the Thing is known at the Location. Datatype TM_Instant (ISO-8601 Time String)"
+      "Locations":
+        type: array
+        description: "A Location can have zero-to-many HistoricalLocations. One HistoricalLocation SHALL have one or many Locations."
+        items:
+          "$ref" : "#/definitions/Location"
+      "Thing":
+        "$ref": "#/definitions/Thing"
+        description: "A HistoricalLocation has one-and-only-one Thing. One Thing MAY have zero-to-many HistoricalLocations. "
+      "Locations@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "Thing@iot.navigationLink":
+        type: string
+        description: link to related entities
+
+  #--------- Datastream --------#
   Datastream:
     description: A datastream groups a collection of observations that are related in some way. The one constraint is that the observations in a datastream must measure the same observed property (i.e., one phenomenon). 
-    allOf:
-      - "$ref": "#/definitions/Entity"
-      - properties:
-            Description:
-              type: string
-              description: This is the description of the datastream entity. The content is open to support other description languages.
-            Thing:
-              "$ref": "#/definitions/Thing"
-              description: A thing can have zero-to-many datastreams. A datastream entity can only link to a thing as a collection of observations or properties.
-            ObservedProperty:
-              "$ref": "#/definitions/ObservedProperty"
-              description: The observations of a datastream observe the same observedProperty. The observations of different datastreams could observe the same observedProperty.
-            Observations:
-              description: A datastream can have zero-to-many observations. One observation must occur in one and only one datastream.
-              type: array
-              items:
-                "$ref": "#/definitions/Observation"
-  ObservedProperty:
-    allOf:
-      - "$ref": "#/definitions/Entity"
-      - properties:
-          URI: 
-            type: string
-            description: The URI of the observedProperty/phenomenon.
-          UnitOfMeasurement:
-            type: string
-            description: The unit of measurement for the observations measuring this observedProperty.
-          Datastreams:
-            type: array
-            items:
-              "$ref": "#/definitions/Datastream"
-        
-  Observation:
-    required:
-      - Time
-      - ResultType
-      - ResultValue
-      
-    description: An act of observing a property or phenomenon on a feature of interest, with the goal of producing an estimate of the value of the property. A specialized event whose result is a data value. [OGC 07-022r1]
-    allOf:
-      - "$ref": "#/definitions/Entity"
-      - properties:
-          Time:
-            type: string
-            format: date
-            description: The time point/period of when the observation happens.
-          ResultType:
-            type: string
-            description: The data type of the ResultValue. Service should by default set the ResultType as Measure unless users specify a different ResultType when creating an observation.
-          ResultValue: 
-            type: string
-            description: The estimated value of an observedProperty from the observation.
-          Datastream: 
-            "$ref": "#/definitions/Datastream"
-          FeatureOfInterest:
-            "$ref": "#/definitions/FeatureOfInterest"
-          Sensor:
-            "$ref": "#/definitions/Sensor"
+    properties:
+      "@iot.id":
+        type: string
+        description: ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type.
+      "@iot.selLink":
+        type: string
+        description: Self-Link is the absolute URL of an entity which is unique among all other entities.
+      "description":
+        type: string
+        description: This is the description of the datastream entity. The content is open to support other description languages.
+      "unitOfMeasure":
+        type: object
+        description: " A JSON Object containing three key- value pairs. The name property presents the full name of the unitOfMeasurement; the symbol property shows the textual form of the unit symbol; and the definition contains the IRI defining the unitOfMeasurement. The values of these properties SHOULD follow the Unified Code for Unit of Measure (UCUM)."
+      "observationType":
+        type: string
+        description: "The type of Observation (with  unique result type), which is used by  the service to encode observations. E.g.  http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"
+      "observedArea":
+        type: object
+        description: "The spatial bounding box of the spatial  extent of all FeaturesOfInterest  that belong to the Observations  associated with this Datastream. Typically a GeoJSON Polygon"
+      "phenomenonTime":
+        type: string
+        description: "The temporal bounding box of the phenomenon times of all observations  belonging to this Datastream.  TM_Period(ISO 8601 Time Interval)"
+      "resultTime":
+        type: string
+        description: "The temporal bounding box of the result times of all observations belonging to this Datastream. TM_Period (ISO 8601 Time Interval)"
+      Thing:
+        "$ref": "#/definitions/Thing"
+        description: "A Thing has zero-to-many Datastreams. A Datastream entity SHALL only link to a Thing as a collection of Observations ."
+      Sensor:
+        "$ref" : "#/definitions/Sensor"
+        description: "The Observations in a Datastream are performed by one-and-only-one Sensor. One Sensor MAY produce zero-to-many Observations in different Datastreams."
+
+      ObservedProperty:
+        "$ref": "#/definitions/ObservedProperty"
+        description: The observations of a datastream SHALL observe the same observedProperty. The observations of different datastreams MAY observe the same observedProperty.
+      Observations:
+        description: "A datastream has zero-to-many observations. One observation SHALL occur in one and only one Datastream."
+        type: array
+        items:
+          "$ref": "#/definitions/Observation"
+      "Thing@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "Sensor@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "ObservedProperty@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "Observations@iot.navigationLink":
+        type: string
+        description: link to related entities
+  
+  #------- Sensor ------#
   Sensor:
-    allOf:
-      - "$ref": "#/definitions/Entity"
-      - properties:
-          Metadata:
+    properties:
+      "@iot.id":
+        type: string
+        description: ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type.
+      "@iot.selLink":
+        type: string
+        description: Self-Link is the absolute URL of an entity which is unique among all other entities.
+      "description":
+        type: string
+        description: "The description of the Sensor entity."
+      "encodingType": 
+        type: string
+        description: "The encoding type of the metadata property. Its value is one of the ValueCode enumeration (see Table 8-14 for the available ValueCode: application/pdf or  http://www.opengis.net/doc/IS/SensorML/2.0)."
+
+      metadata:
             type: string
-            description: The detailed description of the sensor or system. The content is open to accommodate changes to SensorML or to support other description languages.
-          Observations:
-            type: array
-            items:
-                "$ref" : "#/definitions/Observation"
+            description: "The detailed description of the sensor or system. The content is open to accommodate changes to SensorML or to support other description languages."
+      Datastreams:
+          type: array
+          description: "The Observations of a Datastream are measured with the same Sensor. One Sensor MAY produce zero-to-many Observations in different Datastreams."
+          items:
+                "$ref" : "#/definitions/Datastream"
+      "Datastreams@iot.navigationLink":
+        type: string
+        description: link to related entities
+                
+  #----- Observed Property -----#
+  
+  ObservedProperty:
+    properties:
+      "@iot.id":
+        type: string
+        description: ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type.
+      "@iot.selLink":
+        type: string
+        description: Self-Link is the absolute URL of an entity which is unique among all other entities.
+      "name":
+        type: string
+        description: " The name of the ObservedProperty."
+      "definition":
+        type: string
+        description: "The IRI of the ObservedProperty. Dereferencing this IRI SHOULD result in a representation of the definition of the ObservedProperty."
+      "description":
+        type: string
+        description: " A description about the  ObservedProperty."
+      Datastreams:
+        type: array
+        description: " The Observations of a Datastream observe the same ObservedProperty . The Observations of different Datastreams MAY observe the same ObservedProperty. "
+        items:
+          "$ref": "#/definitions/Datastream"
+      "Datastreams@iot.navigationLink":
+        type: string
+        description: link to related entities        
+    
+  Observation:
+    description: "An Observation is act of measuring or otherwise determining the value of a property [OGC and ISO 19156:2011] "
+    properties:
+      "phenomenonTime":
+        type: string
+        description: "The time instant or period of when the Observation happens. Note: Many resource-constrained sensing devices do not have a clock. As a result, a client may omit phenonmenonTime when POST new Observations, even though phenonmenonTime is a mandatory property. When a SensorThings service receives a POST Observations without phenonmenonTime, the service SHALL assign the current server time to the value of the phenomenonTime."
+      "result":
+        type: string
+        description: "The estimated value of an ObservedProperty from the Observation."
+      "resultTime":
+        type: string
+        format: date
+        description: "The time of the Observation's result was generated. Note: Many resource-constrained sensing devices do not have a clock. As a result, a client may omit resultTime when POST new Observations, even though resultTime is a mandatory property. When a SensorThings service receives a POST Observations without resultTime, the service SHALL assign a null value to the resultTime."
+      "resultQuality":
+        type: string
+        description: Describes the quality of the result.
+      "validTime":
+        type: string
+        format: date
+        description: "The time period during which the result may be used. TM_Period (ISO 8601 Time Interval string)"
+      "parameters":
+        type: object
+        description: "Key-value pairs showing the environmental conditions during measurement."
+      Datastream: 
+        "$ref": "#/definitions/Datastream"
+      FeatureOfInterest:
+        "$ref": "#/definitions/FeatureOfInterest"
+      "Datastream@iot.navigationLink":
+        type: string
+        description: link to related entities
+      "FeatureOfInterest@iot.navigationLink":
+        type: string
+        description: link to related entities
+
   FeatureOfInterest:
-    allOf:
-      - "$ref": "#/definitions/Entity"
-      - properties:
-          Description:
+    properties:
+          "description":
             type: string
-            description:  	This is the description of the feature of interest entity. The content is open to accommodate changes to SensorML and to support other description languages. In the case of the thing itself being the feature of interest, this description property is inherited from the thing entity.
-          Geometry:
+            description: "The description about the FeatureOfInterest."
+          encodingType:
             type: string
-            description: The absolute geographical position of the feature of interest. This is generally the GeoJSON geometry object. In the case of the thing itself being the feature of interest, this geometry property is inherited from the thing entity by interpolating the geometries in the location entities.
+            description: "The encoding type of the feature property. Its value is one of the ValueCode enumeration (see Table 8-6 for the available ValueCode, GeoJSON). "
+          feature:
+            type: string
+            description: "The detailed description of the feature. The data type is defined by encodingType."
           Observations:
             type: array
+            description: "An Observation observes on one-and-only-one FeatureOfInterest. One FeatureOfInterest could be observed by zero-to-many Observations."
             items:
               "$ref": "#/definitions/Observation"
+          "Observations@iot.navigationLink":
+            type: string
+            description: link to related entities
+    
+  #----- OGC SensorThings API responses ----#
+  ThingsResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/Thing"
+      "@iot.nextLink":
+        type: string
+  ObservationsResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/Observation"
+      "@iot.nextLink":
+        type: string
+  ObservedPropertiesResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/ObservedProperty"
+      "@iot.nextLink":
+        type: string
+  DatastreamsResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/Datastream"
+      "@iot.nextLink":
+        type: string
+  FeatureOfInterestsResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/FeatureOfInterest"
+      "@iot.nextLink":
+        type: string
+  HistoricalLocationsResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/HistoricalLocation"
+      "@iot.nextLink":
+        type: string
+  LocationsResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/Location"
+      "@iot.nextLink":
+        type: string
+  SensorsResponse:
+    properties:
+      "@iot.count":
+        type: number
+      "value":
+        type: array
+        items:
+          "$ref": "#/definitions/Sensor"
+      "@iot.nextLink":
+        type: string
         
         
