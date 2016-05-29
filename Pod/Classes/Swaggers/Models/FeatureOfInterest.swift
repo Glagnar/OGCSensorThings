@@ -10,16 +10,17 @@ import Foundation
 
 public class FeatureOfInterest: JSONEncodable {
 
-    /** The description about the FeatureOfInterest. */
+    /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
+    public var iotId: String?
+    /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
+    public var iotSelfLink: String?
+    /** Navigation-Link is the relative URL that retrives content of related entities. */
+    public var iotNavigationLink: String?
+    /** This is the description of the feature of interest entity. The content is open to accommodate changes to SensorML and to support other description languages. In the case of the thing itself being the feature of interest, this description property is inherited from the thing entity. */
     public var description: String?
-    /** The encoding type of the feature property. Its value is one of the ValueCode enumeration (see Table 8-6 for the available ValueCode, GeoJSON).  */
-    public var encodingType: String?
-    /** The detailed description of the feature. The data type is defined by encodingType. */
-    public var feature: String?
-    /** An Observation observes on one-and-only-one FeatureOfInterest. One FeatureOfInterest could be observed by zero-to-many Observations. */
+    /** The absolute geographical position of the feature of interest. This is generally the GeoJSON geometry object. In the case of the thing itself being the feature of interest, this geometry property is inherited from the thing entity by interpolating the geometries in the location entities. */
+    public var geometry: String?
     public var observations: [Observation]?
-    /** link to related entities */
-    public var observationsiotNavigationLink: String?
     
 
     public init() {}
@@ -27,11 +28,12 @@ public class FeatureOfInterest: JSONEncodable {
     // MARK: JSONEncodable
     func encodeToJSON() -> AnyObject {
         var nillableDictionary = [String:AnyObject?]()
-        nillableDictionary["description"] = self.description
-        nillableDictionary["encodingType"] = self.encodingType
-        nillableDictionary["feature"] = self.feature
+        nillableDictionary["@iot.id"] = self.iotId
+        nillableDictionary["@iot.selfLink"] = self.iotSelfLink
+        nillableDictionary["@iot.navigationLink"] = self.iotNavigationLink
+        nillableDictionary["Description"] = self.description
+        nillableDictionary["Geometry"] = self.geometry
         nillableDictionary["Observations"] = self.observations?.encodeToJSON()
-        nillableDictionary["Observations@iot.navigationLink"] = self.observationsiotNavigationLink
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }
