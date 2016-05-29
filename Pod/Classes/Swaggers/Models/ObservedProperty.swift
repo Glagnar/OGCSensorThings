@@ -13,13 +13,16 @@ public class ObservedProperty: JSONEncodable {
     public var iotId: AnyObject?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
     public var iotSelfLink: String?
-    /** Navigation-Link is the relative URL that retrives content of related entities. */
-    public var iotNavigationLink: String?
-    /** The URI of the observedProperty/phenomenon. */
-    public var URI: String?
-    /** The unit of measurement for the observations measuring this observedProperty. */
-    public var unitOfMeasurement: String?
+    /**  The name of the ObservedProperty. */
+    public var name: String?
+    /** The IRI of the ObservedProperty. Dereferencing this IRI SHOULD result in a representation of the definition of the ObservedProperty. */
+    public var definition: String?
+    /**  A description about the  ObservedProperty. */
+    public var description: String?
+    /**  The Observations of a Datastream observe the same ObservedProperty . The Observations of different Datastreams MAY observe the same ObservedProperty.  */
     public var datastreams: [Datastream]?
+    /** link to related entities */
+    public var datastreamsiotNavigationLink: String?
 
     public init() {}
 
@@ -28,10 +31,11 @@ public class ObservedProperty: JSONEncodable {
         var nillableDictionary = [String:AnyObject?]()
         nillableDictionary["@iot.id"] = self.iotId
         nillableDictionary["@iot.selfLink"] = self.iotSelfLink
-        nillableDictionary["@iot.navigationLink"] = self.iotNavigationLink
-        nillableDictionary["URI"] = self.URI
-        nillableDictionary["UnitOfMeasurement"] = self.unitOfMeasurement
+        nillableDictionary["name"] = self.name
+        nillableDictionary["definition"] = self.definition
+        nillableDictionary["description"] = self.description
         nillableDictionary["Datastreams"] = self.datastreams?.encodeToJSON()
+        nillableDictionary["Datastreams@iot.navigationLink"] = self.datastreamsiotNavigationLink
         let dictionary: [String:AnyObject] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -18,7 +18,7 @@ public class DefaultAPI: APIBase {
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    public class func datastreamsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: [Datastream]?, error: ErrorType?) -> Void)) {
+    public class func datastreamsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: DatastreamsResponse?, error: ErrorType?) -> Void)) {
         datastreamsGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
             completion(data: response?.body, error: error);
         }
@@ -28,16 +28,99 @@ public class DefaultAPI: APIBase {
     /**
      - GET /Datastreams
      - Gets Datastreams, i.e., collections of observations that are related in some way. The one constraint is that the observations in a datastream must measure the same observed property (i.e., one phenomenon).
-     - examples: [{contentType=application/json, example=[ "" ]}]
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "resultTime" : "aeiou",
+    "@iot.selfLink" : "aeiou",
+    "Thing@iot.navigationLink" : "aeiou",
+    "Sensor@iot.navigationLink" : "aeiou",
+    "unitOfMeasure" : "{}",
+    "ObservedProperty" : {
+      "@iot.selfLink" : "aeiou",
+      "Datastreams@iot.navigationLink" : "aeiou",
+      "Datastreams" : [ "" ],
+      "@iot.id" : "{}",
+      "name" : "aeiou",
+      "description" : "aeiou",
+      "definition" : "aeiou"
+    },
+    "description" : "aeiou",
+    "phenomenonTime" : "aeiou",
+    "ObservedProperty@iot.navigationLink" : "aeiou",
+    "observationType" : "aeiou",
+    "@iot.id" : "{}",
+    "observedArea" : "{}",
+    "Observations@iot.navigationLink" : "aeiou",
+    "Observations" : [ {
+      "result" : "aeiou",
+      "resultTime" : "2000-01-23T04:56:07.000+0000",
+      "Datastream" : "",
+      "FeatureOfInterest" : {
+        "feature" : "aeiou",
+        "encodingType" : "aeiou",
+        "description" : "aeiou",
+        "Observations@iot.navigationLink" : "aeiou",
+        "Observations" : [ "" ]
+      },
+      "phenomenonTime" : "aeiou",
+      "validTime" : "2000-01-23T04:56:07.000+0000",
+      "FeatureOfInterest@iot.navigationLink" : "aeiou",
+      "Datastream@iot.navigationLink" : "aeiou",
+      "parameters" : "{}",
+      "resultQuality" : "aeiou"
+    } ],
+    "Thing" : {
+      "@iot.selfLink" : "aeiou",
+      "Datastreams@iot.navigationLink" : "aeiou",
+      "Datastreams" : [ "" ],
+      "@iot.id" : "{}",
+      "Locations" : [ {
+        "@iot.selfLink" : "aeiou",
+        "@iot.id" : "{}",
+        "encodingType" : "aeiou",
+        "Things" : [ "" ],
+        "Things@iot.navigationLink" : "aeiou",
+        "description" : "aeiou",
+        "location" : "{}",
+        "HistoricalLocations" : [ {
+          "@iot.selfLink" : "aeiou",
+          "Thing@iot.navigationLink" : "aeiou",
+          "@iot.id" : "{}",
+          "Locations" : [ "" ],
+          "time" : "aeiou",
+          "Locations@iot.navigationLink" : "aeiou",
+          "Thing" : ""
+        } ],
+        "HistoricalLocations@iot.navigationLink" : "aeiou"
+      } ],
+      "description" : "aeiou",
+      "Locations@iot.navigationLink" : "aeiou",
+      "HistoricalLocations" : [ "" ],
+      "properties" : "{}",
+      "HistoricalLocations@iot.navigationLink" : "aeiou"
+    },
+    "Sensor" : {
+      "@iot.selfLink" : "aeiou",
+      "metadata" : "aeiou",
+      "Datastreams@iot.navigationLink" : "aeiou",
+      "Datastreams" : [ "" ],
+      "@iot.id" : "{}",
+      "encodingType" : "aeiou",
+      "description" : "aeiou"
+    }
+  } ]
+}}]
      
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
 
-     - returns: RequestBuilder<[Datastream]> 
+     - returns: RequestBuilder<DatastreamsResponse> 
      */
-    public class func datastreamsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<[Datastream]> {
+    public class func datastreamsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<DatastreamsResponse> {
         let path = "/Datastreams"
         let URLString = SwaggerClientAPI.basePath + path
 
@@ -52,7 +135,7 @@ public class DefaultAPI: APIBase {
  
         let convertedParameters = APIHelper.convertBoolToString(parameters)
  
-        let requestBuilder: RequestBuilder<[Datastream]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DatastreamsResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
@@ -97,7 +180,7 @@ public class DefaultAPI: APIBase {
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    public class func featureOfInterestsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: [FeatureOfInterest]?, error: ErrorType?) -> Void)) {
+    public class func featureOfInterestsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: FeatureOfInterestsResponse?, error: ErrorType?) -> Void)) {
         featureOfInterestsGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
             completion(data: response?.body, error: error);
         }
@@ -107,16 +190,99 @@ public class DefaultAPI: APIBase {
     /**
      - GET /FeatureOfInterests
      - Gets Features or feature collections that represent the identifiable object(s) on which the sensor systems are making observations. In the case of an in-situ sensor or observations being attributes of the thing, the feature of interest could be the thing itself. For remote sensors, this may be the geographical area or volume that is being sensed.
-     - examples: [{contentType=application/json, example=[ "" ]}]
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "feature" : "aeiou",
+    "encodingType" : "aeiou",
+    "description" : "aeiou",
+    "Observations@iot.navigationLink" : "aeiou",
+    "Observations" : [ {
+      "result" : "aeiou",
+      "resultTime" : "2000-01-23T04:56:07.000+0000",
+      "Datastream" : {
+        "resultTime" : "aeiou",
+        "@iot.selfLink" : "aeiou",
+        "Thing@iot.navigationLink" : "aeiou",
+        "Sensor@iot.navigationLink" : "aeiou",
+        "unitOfMeasure" : "{}",
+        "ObservedProperty" : {
+          "@iot.selfLink" : "aeiou",
+          "Datastreams@iot.navigationLink" : "aeiou",
+          "Datastreams" : [ "" ],
+          "@iot.id" : "{}",
+          "name" : "aeiou",
+          "description" : "aeiou",
+          "definition" : "aeiou"
+        },
+        "description" : "aeiou",
+        "phenomenonTime" : "aeiou",
+        "ObservedProperty@iot.navigationLink" : "aeiou",
+        "observationType" : "aeiou",
+        "@iot.id" : "{}",
+        "observedArea" : "{}",
+        "Observations@iot.navigationLink" : "aeiou",
+        "Observations" : [ "" ],
+        "Thing" : {
+          "@iot.selfLink" : "aeiou",
+          "Datastreams@iot.navigationLink" : "aeiou",
+          "Datastreams" : [ "" ],
+          "@iot.id" : "{}",
+          "Locations" : [ {
+            "@iot.selfLink" : "aeiou",
+            "@iot.id" : "{}",
+            "encodingType" : "aeiou",
+            "Things" : [ "" ],
+            "Things@iot.navigationLink" : "aeiou",
+            "description" : "aeiou",
+            "location" : "{}",
+            "HistoricalLocations" : [ {
+              "@iot.selfLink" : "aeiou",
+              "Thing@iot.navigationLink" : "aeiou",
+              "@iot.id" : "{}",
+              "Locations" : [ "" ],
+              "time" : "aeiou",
+              "Locations@iot.navigationLink" : "aeiou",
+              "Thing" : ""
+            } ],
+            "HistoricalLocations@iot.navigationLink" : "aeiou"
+          } ],
+          "description" : "aeiou",
+          "Locations@iot.navigationLink" : "aeiou",
+          "HistoricalLocations" : [ "" ],
+          "properties" : "{}",
+          "HistoricalLocations@iot.navigationLink" : "aeiou"
+        },
+        "Sensor" : {
+          "@iot.selfLink" : "aeiou",
+          "metadata" : "aeiou",
+          "Datastreams@iot.navigationLink" : "aeiou",
+          "Datastreams" : [ "" ],
+          "@iot.id" : "{}",
+          "encodingType" : "aeiou",
+          "description" : "aeiou"
+        }
+      },
+      "FeatureOfInterest" : "",
+      "phenomenonTime" : "aeiou",
+      "validTime" : "2000-01-23T04:56:07.000+0000",
+      "FeatureOfInterest@iot.navigationLink" : "aeiou",
+      "Datastream@iot.navigationLink" : "aeiou",
+      "parameters" : "{}",
+      "resultQuality" : "aeiou"
+    } ]
+  } ]
+}}]
      
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
 
-     - returns: RequestBuilder<[FeatureOfInterest]> 
+     - returns: RequestBuilder<FeatureOfInterestsResponse> 
      */
-    public class func featureOfInterestsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<[FeatureOfInterest]> {
+    public class func featureOfInterestsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<FeatureOfInterestsResponse> {
         let path = "/FeatureOfInterests"
         let URLString = SwaggerClientAPI.basePath + path
 
@@ -131,7 +297,7 @@ public class DefaultAPI: APIBase {
  
         let convertedParameters = APIHelper.convertBoolToString(parameters)
  
-        let requestBuilder: RequestBuilder<[FeatureOfInterest]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<FeatureOfInterestsResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
@@ -173,10 +339,172 @@ public class DefaultAPI: APIBase {
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
+     - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    public class func historicalLocationsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: HistoricalLocationsResponse?, error: ErrorType?) -> Void)) {
+        historicalLocationsGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
+            completion(data: response?.body, error: error);
+        }
+    }
+
+
+    /**
+     - GET /HistoricalLocations
+     - Gets Historic Locations of a Thing. A Thing’s HistoricalLocation entity set provides the current (i.e., last known) and previous locations of the Thing with their time.
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "@iot.selfLink" : "aeiou",
+    "Thing@iot.navigationLink" : "aeiou",
+    "@iot.id" : "{}",
+    "Locations" : [ {
+      "@iot.selfLink" : "aeiou",
+      "@iot.id" : "{}",
+      "encodingType" : "aeiou",
+      "Things" : [ {
+        "@iot.selfLink" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ {
+          "resultTime" : "aeiou",
+          "@iot.selfLink" : "aeiou",
+          "Thing@iot.navigationLink" : "aeiou",
+          "Sensor@iot.navigationLink" : "aeiou",
+          "unitOfMeasure" : "{}",
+          "ObservedProperty" : {
+            "@iot.selfLink" : "aeiou",
+            "Datastreams@iot.navigationLink" : "aeiou",
+            "Datastreams" : [ "" ],
+            "@iot.id" : "{}",
+            "name" : "aeiou",
+            "description" : "aeiou",
+            "definition" : "aeiou"
+          },
+          "description" : "aeiou",
+          "phenomenonTime" : "aeiou",
+          "ObservedProperty@iot.navigationLink" : "aeiou",
+          "observationType" : "aeiou",
+          "@iot.id" : "{}",
+          "observedArea" : "{}",
+          "Observations@iot.navigationLink" : "aeiou",
+          "Observations" : [ {
+            "result" : "aeiou",
+            "resultTime" : "2000-01-23T04:56:07.000+0000",
+            "Datastream" : "",
+            "FeatureOfInterest" : {
+              "feature" : "aeiou",
+              "encodingType" : "aeiou",
+              "description" : "aeiou",
+              "Observations@iot.navigationLink" : "aeiou",
+              "Observations" : [ "" ]
+            },
+            "phenomenonTime" : "aeiou",
+            "validTime" : "2000-01-23T04:56:07.000+0000",
+            "FeatureOfInterest@iot.navigationLink" : "aeiou",
+            "Datastream@iot.navigationLink" : "aeiou",
+            "parameters" : "{}",
+            "resultQuality" : "aeiou"
+          } ],
+          "Thing" : "",
+          "Sensor" : {
+            "@iot.selfLink" : "aeiou",
+            "metadata" : "aeiou",
+            "Datastreams@iot.navigationLink" : "aeiou",
+            "Datastreams" : [ "" ],
+            "@iot.id" : "{}",
+            "encodingType" : "aeiou",
+            "description" : "aeiou"
+          }
+        } ],
+        "@iot.id" : "{}",
+        "Locations" : [ "" ],
+        "description" : "aeiou",
+        "Locations@iot.navigationLink" : "aeiou",
+        "HistoricalLocations" : [ "" ],
+        "properties" : "{}",
+        "HistoricalLocations@iot.navigationLink" : "aeiou"
+      } ],
+      "Things@iot.navigationLink" : "aeiou",
+      "description" : "aeiou",
+      "location" : "{}",
+      "HistoricalLocations" : [ "" ],
+      "HistoricalLocations@iot.navigationLink" : "aeiou"
+    } ],
+    "time" : "aeiou",
+    "Locations@iot.navigationLink" : "aeiou",
+    "Thing" : ""
+  } ]
+}}]
+     
+     - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
+     - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
+     - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
+     - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
+
+     - returns: RequestBuilder<HistoricalLocationsResponse> 
+     */
+    public class func historicalLocationsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<HistoricalLocationsResponse> {
+        let path = "/HistoricalLocations"
+        let URLString = SwaggerClientAPI.basePath + path
+
+        let nillableParameters: [String:AnyObject?] = [
+            "$orderby": orderby,
+            "$top": top?.encodeToJSON(),
+            "$skip": skip?.encodeToJSON(),
+            "$filter": filter
+        ]
+ 
+        let parameters = APIHelper.rejectNil(nillableParameters)
+ 
+        let convertedParameters = APIHelper.convertBoolToString(parameters)
+ 
+        let requestBuilder: RequestBuilder<HistoricalLocationsResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+    }
+
+    /**
+
+     - parameter historicLocation: (body) The HistoricalLocation to add 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    public class func historicalLocationsPost(historicLocation historicLocation: HistoricalLocation, completion: ((error: ErrorType?) -> Void)) {
+        historicalLocationsPostWithRequestBuilder(historicLocation: historicLocation).execute { (response, error) -> Void in
+            completion(error: error);
+        }
+    }
+
+
+    /**
+     - POST /HistoricalLocations
+     - Posts a new HistoricLocation description
+     
+     - parameter historicLocation: (body) The HistoricalLocation to add 
+
+     - returns: RequestBuilder<Void> 
+     */
+    public class func historicalLocationsPostWithRequestBuilder(historicLocation historicLocation: HistoricalLocation) -> RequestBuilder<Void> {
+        let path = "/HistoricalLocations"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = historicLocation.encodeToJSON() as? [String:AnyObject]
+ 
+        let convertedParameters = APIHelper.convertBoolToString(parameters)
+ 
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: true)
+    }
+
+    /**
+
+     - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
+     - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
+     - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    public class func locationsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: [Location]?, error: ErrorType?) -> Void)) {
+    public class func locationsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: LocationsResponse?, error: ErrorType?) -> Void)) {
         locationsGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
             completion(data: response?.body, error: error);
         }
@@ -186,16 +514,99 @@ public class DefaultAPI: APIBase {
     /**
      - GET /Locations
      - Gets Locations, i.e., registered absolute geographical position at a specific time point.
-     - examples: [{contentType=application/json, example=[ "" ]}]
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "@iot.selfLink" : "aeiou",
+    "@iot.id" : "{}",
+    "encodingType" : "aeiou",
+    "Things" : [ {
+      "@iot.selfLink" : "aeiou",
+      "Datastreams@iot.navigationLink" : "aeiou",
+      "Datastreams" : [ {
+        "resultTime" : "aeiou",
+        "@iot.selfLink" : "aeiou",
+        "Thing@iot.navigationLink" : "aeiou",
+        "Sensor@iot.navigationLink" : "aeiou",
+        "unitOfMeasure" : "{}",
+        "ObservedProperty" : {
+          "@iot.selfLink" : "aeiou",
+          "Datastreams@iot.navigationLink" : "aeiou",
+          "Datastreams" : [ "" ],
+          "@iot.id" : "{}",
+          "name" : "aeiou",
+          "description" : "aeiou",
+          "definition" : "aeiou"
+        },
+        "description" : "aeiou",
+        "phenomenonTime" : "aeiou",
+        "ObservedProperty@iot.navigationLink" : "aeiou",
+        "observationType" : "aeiou",
+        "@iot.id" : "{}",
+        "observedArea" : "{}",
+        "Observations@iot.navigationLink" : "aeiou",
+        "Observations" : [ {
+          "result" : "aeiou",
+          "resultTime" : "2000-01-23T04:56:07.000+0000",
+          "Datastream" : "",
+          "FeatureOfInterest" : {
+            "feature" : "aeiou",
+            "encodingType" : "aeiou",
+            "description" : "aeiou",
+            "Observations@iot.navigationLink" : "aeiou",
+            "Observations" : [ "" ]
+          },
+          "phenomenonTime" : "aeiou",
+          "validTime" : "2000-01-23T04:56:07.000+0000",
+          "FeatureOfInterest@iot.navigationLink" : "aeiou",
+          "Datastream@iot.navigationLink" : "aeiou",
+          "parameters" : "{}",
+          "resultQuality" : "aeiou"
+        } ],
+        "Thing" : "",
+        "Sensor" : {
+          "@iot.selfLink" : "aeiou",
+          "metadata" : "aeiou",
+          "Datastreams@iot.navigationLink" : "aeiou",
+          "Datastreams" : [ "" ],
+          "@iot.id" : "{}",
+          "encodingType" : "aeiou",
+          "description" : "aeiou"
+        }
+      } ],
+      "@iot.id" : "{}",
+      "Locations" : [ "" ],
+      "description" : "aeiou",
+      "Locations@iot.navigationLink" : "aeiou",
+      "HistoricalLocations" : [ {
+        "@iot.selfLink" : "aeiou",
+        "Thing@iot.navigationLink" : "aeiou",
+        "@iot.id" : "{}",
+        "Locations" : [ "" ],
+        "time" : "aeiou",
+        "Locations@iot.navigationLink" : "aeiou",
+        "Thing" : ""
+      } ],
+      "properties" : "{}",
+      "HistoricalLocations@iot.navigationLink" : "aeiou"
+    } ],
+    "Things@iot.navigationLink" : "aeiou",
+    "description" : "aeiou",
+    "location" : "{}",
+    "HistoricalLocations" : [ "" ],
+    "HistoricalLocations@iot.navigationLink" : "aeiou"
+  } ]
+}}]
      
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
 
-     - returns: RequestBuilder<[Location]> 
+     - returns: RequestBuilder<LocationsResponse> 
      */
-    public class func locationsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<[Location]> {
+    public class func locationsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<LocationsResponse> {
         let path = "/Locations"
         let URLString = SwaggerClientAPI.basePath + path
 
@@ -210,7 +621,7 @@ public class DefaultAPI: APIBase {
  
         let convertedParameters = APIHelper.convertBoolToString(parameters)
  
-        let requestBuilder: RequestBuilder<[Location]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<LocationsResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
@@ -255,7 +666,7 @@ public class DefaultAPI: APIBase {
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    public class func observationsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: [Observation]?, error: ErrorType?) -> Void)) {
+    public class func observationsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: ObservationsResponse?, error: ErrorType?) -> Void)) {
         observationsGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
             completion(data: response?.body, error: error);
         }
@@ -265,16 +676,99 @@ public class DefaultAPI: APIBase {
     /**
      - GET /Observations
      - Gets Observation objects, i.e., objects representing the act of observing a property or phenomenon on a feature of interest, with the goal of producing an estimate of the value of the property. A specialized event whose result is a data value. [OGC 07-022r1]
-     - examples: [{contentType=application/json, example=[ "" ]}]
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "result" : "aeiou",
+    "resultTime" : "2000-01-23T04:56:07.000+0000",
+    "Datastream" : {
+      "resultTime" : "aeiou",
+      "@iot.selfLink" : "aeiou",
+      "Thing@iot.navigationLink" : "aeiou",
+      "Sensor@iot.navigationLink" : "aeiou",
+      "unitOfMeasure" : "{}",
+      "ObservedProperty" : {
+        "@iot.selfLink" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "name" : "aeiou",
+        "description" : "aeiou",
+        "definition" : "aeiou"
+      },
+      "description" : "aeiou",
+      "phenomenonTime" : "aeiou",
+      "ObservedProperty@iot.navigationLink" : "aeiou",
+      "observationType" : "aeiou",
+      "@iot.id" : "{}",
+      "observedArea" : "{}",
+      "Observations@iot.navigationLink" : "aeiou",
+      "Observations" : [ "" ],
+      "Thing" : {
+        "@iot.selfLink" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "Locations" : [ {
+          "@iot.selfLink" : "aeiou",
+          "@iot.id" : "{}",
+          "encodingType" : "aeiou",
+          "Things" : [ "" ],
+          "Things@iot.navigationLink" : "aeiou",
+          "description" : "aeiou",
+          "location" : "{}",
+          "HistoricalLocations" : [ {
+            "@iot.selfLink" : "aeiou",
+            "Thing@iot.navigationLink" : "aeiou",
+            "@iot.id" : "{}",
+            "Locations" : [ "" ],
+            "time" : "aeiou",
+            "Locations@iot.navigationLink" : "aeiou",
+            "Thing" : ""
+          } ],
+          "HistoricalLocations@iot.navigationLink" : "aeiou"
+        } ],
+        "description" : "aeiou",
+        "Locations@iot.navigationLink" : "aeiou",
+        "HistoricalLocations" : [ "" ],
+        "properties" : "{}",
+        "HistoricalLocations@iot.navigationLink" : "aeiou"
+      },
+      "Sensor" : {
+        "@iot.selfLink" : "aeiou",
+        "metadata" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "encodingType" : "aeiou",
+        "description" : "aeiou"
+      }
+    },
+    "FeatureOfInterest" : {
+      "feature" : "aeiou",
+      "encodingType" : "aeiou",
+      "description" : "aeiou",
+      "Observations@iot.navigationLink" : "aeiou",
+      "Observations" : [ "" ]
+    },
+    "phenomenonTime" : "aeiou",
+    "validTime" : "2000-01-23T04:56:07.000+0000",
+    "FeatureOfInterest@iot.navigationLink" : "aeiou",
+    "Datastream@iot.navigationLink" : "aeiou",
+    "parameters" : "{}",
+    "resultQuality" : "aeiou"
+  } ]
+}}]
      
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
 
-     - returns: RequestBuilder<[Observation]> 
+     - returns: RequestBuilder<ObservationsResponse> 
      */
-    public class func observationsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<[Observation]> {
+    public class func observationsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<ObservationsResponse> {
         let path = "/Observations"
         let URLString = SwaggerClientAPI.basePath + path
 
@@ -289,7 +783,7 @@ public class DefaultAPI: APIBase {
  
         let convertedParameters = APIHelper.convertBoolToString(parameters)
  
-        let requestBuilder: RequestBuilder<[Observation]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ObservationsResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
@@ -334,7 +828,7 @@ public class DefaultAPI: APIBase {
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    public class func observedPropertiesGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: [ObservedProperty]?, error: ErrorType?) -> Void)) {
+    public class func observedPropertiesGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: ObservedPropertiesResponse?, error: ErrorType?) -> Void)) {
         observedPropertiesGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
             completion(data: response?.body, error: error);
         }
@@ -344,16 +838,99 @@ public class DefaultAPI: APIBase {
     /**
      - GET /ObservedProperties
      - Gets ObservedProprties, i.e., the phenomenon of a given observation.
-     - examples: [{contentType=application/json, example=[ "" ]}]
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "@iot.selfLink" : "aeiou",
+    "Datastreams@iot.navigationLink" : "aeiou",
+    "Datastreams" : [ {
+      "resultTime" : "aeiou",
+      "@iot.selfLink" : "aeiou",
+      "Thing@iot.navigationLink" : "aeiou",
+      "Sensor@iot.navigationLink" : "aeiou",
+      "unitOfMeasure" : "{}",
+      "ObservedProperty" : "",
+      "description" : "aeiou",
+      "phenomenonTime" : "aeiou",
+      "ObservedProperty@iot.navigationLink" : "aeiou",
+      "observationType" : "aeiou",
+      "@iot.id" : "{}",
+      "observedArea" : "{}",
+      "Observations@iot.navigationLink" : "aeiou",
+      "Observations" : [ {
+        "result" : "aeiou",
+        "resultTime" : "2000-01-23T04:56:07.000+0000",
+        "Datastream" : "",
+        "FeatureOfInterest" : {
+          "feature" : "aeiou",
+          "encodingType" : "aeiou",
+          "description" : "aeiou",
+          "Observations@iot.navigationLink" : "aeiou",
+          "Observations" : [ "" ]
+        },
+        "phenomenonTime" : "aeiou",
+        "validTime" : "2000-01-23T04:56:07.000+0000",
+        "FeatureOfInterest@iot.navigationLink" : "aeiou",
+        "Datastream@iot.navigationLink" : "aeiou",
+        "parameters" : "{}",
+        "resultQuality" : "aeiou"
+      } ],
+      "Thing" : {
+        "@iot.selfLink" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "Locations" : [ {
+          "@iot.selfLink" : "aeiou",
+          "@iot.id" : "{}",
+          "encodingType" : "aeiou",
+          "Things" : [ "" ],
+          "Things@iot.navigationLink" : "aeiou",
+          "description" : "aeiou",
+          "location" : "{}",
+          "HistoricalLocations" : [ {
+            "@iot.selfLink" : "aeiou",
+            "Thing@iot.navigationLink" : "aeiou",
+            "@iot.id" : "{}",
+            "Locations" : [ "" ],
+            "time" : "aeiou",
+            "Locations@iot.navigationLink" : "aeiou",
+            "Thing" : ""
+          } ],
+          "HistoricalLocations@iot.navigationLink" : "aeiou"
+        } ],
+        "description" : "aeiou",
+        "Locations@iot.navigationLink" : "aeiou",
+        "HistoricalLocations" : [ "" ],
+        "properties" : "{}",
+        "HistoricalLocations@iot.navigationLink" : "aeiou"
+      },
+      "Sensor" : {
+        "@iot.selfLink" : "aeiou",
+        "metadata" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "encodingType" : "aeiou",
+        "description" : "aeiou"
+      }
+    } ],
+    "@iot.id" : "{}",
+    "name" : "aeiou",
+    "description" : "aeiou",
+    "definition" : "aeiou"
+  } ]
+}}]
      
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
 
-     - returns: RequestBuilder<[ObservedProperty]> 
+     - returns: RequestBuilder<ObservedPropertiesResponse> 
      */
-    public class func observedPropertiesGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<[ObservedProperty]> {
+    public class func observedPropertiesGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<ObservedPropertiesResponse> {
         let path = "/ObservedProperties"
         let URLString = SwaggerClientAPI.basePath + path
 
@@ -368,7 +945,7 @@ public class DefaultAPI: APIBase {
  
         let convertedParameters = APIHelper.convertBoolToString(parameters)
  
-        let requestBuilder: RequestBuilder<[ObservedProperty]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ObservedPropertiesResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
@@ -413,7 +990,7 @@ public class DefaultAPI: APIBase {
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    public class func sensorsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: [Sensor]?, error: ErrorType?) -> Void)) {
+    public class func sensorsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: SensorsResponse?, error: ErrorType?) -> Void)) {
         sensorsGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
             completion(data: response?.body, error: error);
         }
@@ -423,16 +1000,99 @@ public class DefaultAPI: APIBase {
     /**
      - GET /Sensors
      - Gets available Sensors, i.e., instruments that can observe a property or phenomenon with the goal of producing an estimate of the value of the property. In some cases,  sensor in this data model can also be seen as the procedure (method, algorithm, or instrument) defined in OGC 07-022r1.
-     - examples: [{contentType=application/json, example=[ "" ]}]
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "@iot.selfLink" : "aeiou",
+    "metadata" : "aeiou",
+    "Datastreams@iot.navigationLink" : "aeiou",
+    "Datastreams" : [ {
+      "resultTime" : "aeiou",
+      "@iot.selfLink" : "aeiou",
+      "Thing@iot.navigationLink" : "aeiou",
+      "Sensor@iot.navigationLink" : "aeiou",
+      "unitOfMeasure" : "{}",
+      "ObservedProperty" : {
+        "@iot.selfLink" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "name" : "aeiou",
+        "description" : "aeiou",
+        "definition" : "aeiou"
+      },
+      "description" : "aeiou",
+      "phenomenonTime" : "aeiou",
+      "ObservedProperty@iot.navigationLink" : "aeiou",
+      "observationType" : "aeiou",
+      "@iot.id" : "{}",
+      "observedArea" : "{}",
+      "Observations@iot.navigationLink" : "aeiou",
+      "Observations" : [ {
+        "result" : "aeiou",
+        "resultTime" : "2000-01-23T04:56:07.000+0000",
+        "Datastream" : "",
+        "FeatureOfInterest" : {
+          "feature" : "aeiou",
+          "encodingType" : "aeiou",
+          "description" : "aeiou",
+          "Observations@iot.navigationLink" : "aeiou",
+          "Observations" : [ "" ]
+        },
+        "phenomenonTime" : "aeiou",
+        "validTime" : "2000-01-23T04:56:07.000+0000",
+        "FeatureOfInterest@iot.navigationLink" : "aeiou",
+        "Datastream@iot.navigationLink" : "aeiou",
+        "parameters" : "{}",
+        "resultQuality" : "aeiou"
+      } ],
+      "Thing" : {
+        "@iot.selfLink" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "Locations" : [ {
+          "@iot.selfLink" : "aeiou",
+          "@iot.id" : "{}",
+          "encodingType" : "aeiou",
+          "Things" : [ "" ],
+          "Things@iot.navigationLink" : "aeiou",
+          "description" : "aeiou",
+          "location" : "{}",
+          "HistoricalLocations" : [ {
+            "@iot.selfLink" : "aeiou",
+            "Thing@iot.navigationLink" : "aeiou",
+            "@iot.id" : "{}",
+            "Locations" : [ "" ],
+            "time" : "aeiou",
+            "Locations@iot.navigationLink" : "aeiou",
+            "Thing" : ""
+          } ],
+          "HistoricalLocations@iot.navigationLink" : "aeiou"
+        } ],
+        "description" : "aeiou",
+        "Locations@iot.navigationLink" : "aeiou",
+        "HistoricalLocations" : [ "" ],
+        "properties" : "{}",
+        "HistoricalLocations@iot.navigationLink" : "aeiou"
+      },
+      "Sensor" : ""
+    } ],
+    "@iot.id" : "{}",
+    "encodingType" : "aeiou",
+    "description" : "aeiou"
+  } ]
+}}]
      
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
 
-     - returns: RequestBuilder<[Sensor]> 
+     - returns: RequestBuilder<SensorsResponse> 
      */
-    public class func sensorsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<[Sensor]> {
+    public class func sensorsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<SensorsResponse> {
         let path = "/Sensors"
         let URLString = SwaggerClientAPI.basePath + path
 
@@ -447,7 +1107,7 @@ public class DefaultAPI: APIBase {
  
         let convertedParameters = APIHelper.convertBoolToString(parameters)
  
-        let requestBuilder: RequestBuilder<[Sensor]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<SensorsResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
@@ -492,7 +1152,7 @@ public class DefaultAPI: APIBase {
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    public class func thingsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: [Thing]?, error: ErrorType?) -> Void)) {
+    public class func thingsGet(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil, completion: ((data: ThingsResponse?, error: ErrorType?) -> Void)) {
         thingsGetWithRequestBuilder(orderby: orderby, top: top, skip: skip, filter: filter).execute { (response, error) -> Void in
             completion(data: response?.body, error: error);
         }
@@ -502,16 +1162,99 @@ public class DefaultAPI: APIBase {
     /**
      - GET /Things
      - Gets `Things` objects. We use the ITU-T definition, i.e., with regard to the Internet of Things, a thing is an object of         the physical world (physical things) or the information world (virtual things) which is capable of being identified and         integrated into communication networks. (ITU-T Y.2060)<br/>Several query params are supported to filter retrieved data according to different constraints.
-     - examples: [{contentType=application/json, example=[ "" ]}]
+     - examples: [{contentType=application/json, example={
+  "@iot.nextLink" : "aeiou",
+  "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
+  "value" : [ {
+    "@iot.selfLink" : "aeiou",
+    "Datastreams@iot.navigationLink" : "aeiou",
+    "Datastreams" : [ {
+      "resultTime" : "aeiou",
+      "@iot.selfLink" : "aeiou",
+      "Thing@iot.navigationLink" : "aeiou",
+      "Sensor@iot.navigationLink" : "aeiou",
+      "unitOfMeasure" : "{}",
+      "ObservedProperty" : {
+        "@iot.selfLink" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "name" : "aeiou",
+        "description" : "aeiou",
+        "definition" : "aeiou"
+      },
+      "description" : "aeiou",
+      "phenomenonTime" : "aeiou",
+      "ObservedProperty@iot.navigationLink" : "aeiou",
+      "observationType" : "aeiou",
+      "@iot.id" : "{}",
+      "observedArea" : "{}",
+      "Observations@iot.navigationLink" : "aeiou",
+      "Observations" : [ {
+        "result" : "aeiou",
+        "resultTime" : "2000-01-23T04:56:07.000+0000",
+        "Datastream" : "",
+        "FeatureOfInterest" : {
+          "feature" : "aeiou",
+          "encodingType" : "aeiou",
+          "description" : "aeiou",
+          "Observations@iot.navigationLink" : "aeiou",
+          "Observations" : [ "" ]
+        },
+        "phenomenonTime" : "aeiou",
+        "validTime" : "2000-01-23T04:56:07.000+0000",
+        "FeatureOfInterest@iot.navigationLink" : "aeiou",
+        "Datastream@iot.navigationLink" : "aeiou",
+        "parameters" : "{}",
+        "resultQuality" : "aeiou"
+      } ],
+      "Thing" : "",
+      "Sensor" : {
+        "@iot.selfLink" : "aeiou",
+        "metadata" : "aeiou",
+        "Datastreams@iot.navigationLink" : "aeiou",
+        "Datastreams" : [ "" ],
+        "@iot.id" : "{}",
+        "encodingType" : "aeiou",
+        "description" : "aeiou"
+      }
+    } ],
+    "@iot.id" : "{}",
+    "Locations" : [ {
+      "@iot.selfLink" : "aeiou",
+      "@iot.id" : "{}",
+      "encodingType" : "aeiou",
+      "Things" : [ "" ],
+      "Things@iot.navigationLink" : "aeiou",
+      "description" : "aeiou",
+      "location" : "{}",
+      "HistoricalLocations" : [ {
+        "@iot.selfLink" : "aeiou",
+        "Thing@iot.navigationLink" : "aeiou",
+        "@iot.id" : "{}",
+        "Locations" : [ "" ],
+        "time" : "aeiou",
+        "Locations@iot.navigationLink" : "aeiou",
+        "Thing" : ""
+      } ],
+      "HistoricalLocations@iot.navigationLink" : "aeiou"
+    } ],
+    "description" : "aeiou",
+    "Locations@iot.navigationLink" : "aeiou",
+    "HistoricalLocations" : [ "" ],
+    "properties" : "{}",
+    "HistoricalLocations@iot.navigationLink" : "aeiou"
+  } ]
+}}]
      
      - parameter orderby: (query) The &lt;strong&gt;$orderby&lt;/strong&gt; query option is used to specify which properties are used to order the collection of entities identified by the resource path. The value of the &lt;strong&gt;$orderby&lt;/strong&gt; query option contains a comma separated list of expressions whose primitive result values are used to sort the results. A special case of such an expression is a property path terminating on a primitive property.&lt;br/&gt;&lt;br/&gt;The expression may include the suffix asc for ascending or desc for descending, separated from the property name by one or more spaces. If asc or desc is not specified, the service must order by the specified property in ascending order. &lt;br/&gt;&lt;br/&gt;Null values come before non-null values when sorting in ascending order and after non-null values when sorting in descending order.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;ResultValue&lt;/address&gt; returns all Observations ordered by the ResultValue property in ascending order.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$orderby&#x3D;Datastreams/ID%20desc,Time&lt;/address&gt; returns all Observations ordered by the ID property of the linked Datastream entry in descending order, then by the Time property of Observations in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter top: (query) The &lt;strong&gt;$top&lt;/strong&gt; query option specifies a non-negative integer that limits the number of entities returned within a collection. The service must return the number of available entities up to, but not exceeding, the specified value.&lt;br/&gt;Usually, the &lt;strong&gt;$top&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;In addition, if the $top value exceeds the service-driven pagination limitation (i.e., the largest number of entities the service can return in a single response), the &lt;strong&gt;$top&lt;/strong&gt; query option should be discarded and the pagination limitation should be imposed. (optional)
      - parameter skip: (query) The &lt;strong&gt;$skip&lt;/strong&gt; query option specifies that the result must not include the first n entities, where n is a non-negative integer value specified by the $skip query option.&lt;br/&gt;Usually, the &lt;strong&gt;$skip&lt;/strong&gt; query option is used with the &lt;strong&gt;$orderby&lt;/strong&gt; query option. However, while no ordering semantics are mandated, to ensure repeatable results, a data service must always use the same semantics to obtain a full ordering across requests.&lt;br/&gt;Where &lt;strong&gt;$top&lt;/strong&gt; and &lt;strong&gt;$skip&lt;/strong&gt; are used together, the &lt;strong&gt;$skip&lt;/strong&gt; must be applied before the &lt;strong&gt;$top&lt;/strong&gt;, regardless of the order in which they appear in the request.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;address&gt; http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$skip&#x3D;5&lt;/address&gt; returns Product entities starting with the sixth Product entity in the Products collection.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$skip&#x3D;2&amp;$top&#x3D;2&amp;$orderby&#x3D;Time&lt;/address&gt; returns the third and fourth Observation entities from the collection of all Observation entities when the collection is sorted by the Time property in ascending order.&lt;/li&gt;&lt;/ul&gt; (optional)
      - parameter filter: (query) A URI with a &lt;strong&gt;$filter&lt;/strong&gt; query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the &lt;strong&gt;$filter&lt;/strong&gt;. The value of the &lt;strong&gt;$filter&lt;/strong&gt; option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime&#39;ISO 8601 time string&#39;.&lt;br/&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;ResultValue%20lt%2010.00&lt;/address&gt; returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 1:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter&#x3D;Datastream/ObservedProperty/UnitOfMeasurement%20eq%20&#39;Celsius&#39;&lt;/address&gt; returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is &#39;Celsius&#39;.&lt;/li&gt;&lt;strong&gt;Example 2:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))&lt;/address&gt; returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Example 3:&lt;/strong&gt; &lt;address&gt;http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter&#x3D;Datastreams/Observations/FeatureOfInterest/ID%20eq20&#39;FOI_1&#39;%20and%20Datastreams/Observations/Time%20ge%20datetime&#39;2010-06-01T00:00:00Z&#39;%20and%20Datastreams/Observations/Time%20le%20datetime&#39;2010-07-01T00:00:00Z&#39;&lt;/address&gt; returns Things that have any observations on a feature of interest with a unique identifier equals to &#39;FOI_1&#39; in June 2010.&lt;/li&gt;&lt;/ul&gt;For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations (optional)
 
-     - returns: RequestBuilder<[Thing]> 
+     - returns: RequestBuilder<ThingsResponse> 
      */
-    public class func thingsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<[Thing]> {
+    public class func thingsGetWithRequestBuilder(orderby orderby: String? = nil, top: Int32? = nil, skip: Int32? = nil, filter: String? = nil) -> RequestBuilder<ThingsResponse> {
         let path = "/Things"
         let URLString = SwaggerClientAPI.basePath + path
 
@@ -526,7 +1269,7 @@ public class DefaultAPI: APIBase {
  
         let convertedParameters = APIHelper.convertBoolToString(parameters)
  
-        let requestBuilder: RequestBuilder<[Thing]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ThingsResponse>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
     }
