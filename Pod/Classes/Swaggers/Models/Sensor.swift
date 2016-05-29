@@ -9,7 +9,6 @@ import Foundation
 
 
 public class Sensor: JSONEncodable {
-
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var iotId: AnyObject?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
@@ -19,7 +18,6 @@ public class Sensor: JSONEncodable {
     /** The detailed description of the sensor or system. The content is open to accommodate changes to SensorML or to support other description languages. */
     public var metadata: String?
     public var observations: [Observation]?
-    
 
     public init() {}
 

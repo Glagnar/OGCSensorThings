@@ -10,7 +10,6 @@ import Foundation
 
 /** An act of observing a property or phenomenon on a feature of interest, with the goal of producing an estimate of the value of the property. A specialized event whose result is a data value. [OGC 07-022r1] */
 public class Observation: JSONEncodable {
-
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var iotId: AnyObject?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
@@ -26,7 +25,6 @@ public class Observation: JSONEncodable {
     public var datastream: Datastream?
     public var featureOfInterest: FeatureOfInterest?
     public var sensor: Sensor?
-    
 
     public init() {}
 

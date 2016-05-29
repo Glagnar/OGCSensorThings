@@ -46,9 +46,9 @@ class Decoders {
     }
     
     static func decode<T, Key: Hashable>(clazz clazz: [Key:T].Type, source: AnyObject) -> [Key:T] {
-        let sourceDictinoary = source as! [Key: AnyObject]
+        let sourceDictionary = source as! [Key: AnyObject]
         var dictionary = [Key:T]()
-        for (key, value) in sourceDictinoary {
+        for (key, value) in sourceDictionary {
             dictionary[key] = Decoders.decode(clazz: T.self, source: value)
         }
         return dictionary
@@ -56,6 +56,12 @@ class Decoders {
     
     static func decode<T>(clazz clazz: T.Type, source: AnyObject) -> T {
         initialize()
+        if T.self is Int32.Type && source is NSNumber {
+            return source.intValue as! T;
+        }
+        if T.self is Int64.Type && source is NSNumber {
+            return source.longLongValue as! T;
+        }
         if source is T {
             return source as! T
         }
@@ -124,11 +130,11 @@ class Decoders {
                 fatalError("formatter failed to parse \(source)")
             } 
 
-			// Decoder for [Datastream]
+            // Decoder for [Datastream]
             Decoders.addDecoder(clazz: [Datastream].self) { (source: AnyObject) -> [Datastream] in
                 return Decoders.decode(clazz: [Datastream].self, source: source)
             }
-			// Decoder for Datastream
+            // Decoder for Datastream
             Decoders.addDecoder(clazz: Datastream.self) { (source: AnyObject) -> Datastream in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Datastream()
@@ -141,13 +147,13 @@ class Decoders {
                 instance.observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
                 return instance
             }
-			
 
-			// Decoder for [Entity]
+
+            // Decoder for [Entity]
             Decoders.addDecoder(clazz: [Entity].self) { (source: AnyObject) -> [Entity] in
                 return Decoders.decode(clazz: [Entity].self, source: source)
             }
-			// Decoder for Entity
+            // Decoder for Entity
             Decoders.addDecoder(clazz: Entity.self) { (source: AnyObject) -> Entity in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Entity()
@@ -156,13 +162,13 @@ class Decoders {
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 return instance
             }
-			
 
-			// Decoder for [FeatureOfInterest]
+
+            // Decoder for [FeatureOfInterest]
             Decoders.addDecoder(clazz: [FeatureOfInterest].self) { (source: AnyObject) -> [FeatureOfInterest] in
                 return Decoders.decode(clazz: [FeatureOfInterest].self, source: source)
             }
-			// Decoder for FeatureOfInterest
+            // Decoder for FeatureOfInterest
             Decoders.addDecoder(clazz: FeatureOfInterest.self) { (source: AnyObject) -> FeatureOfInterest in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = FeatureOfInterest()
@@ -174,13 +180,13 @@ class Decoders {
                 instance.observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
                 return instance
             }
-			
 
-			// Decoder for [Location]
+
+            // Decoder for [Location]
             Decoders.addDecoder(clazz: [Location].self) { (source: AnyObject) -> [Location] in
                 return Decoders.decode(clazz: [Location].self, source: source)
             }
-			// Decoder for Location
+            // Decoder for Location
             Decoders.addDecoder(clazz: Location.self) { (source: AnyObject) -> Location in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Location()
@@ -192,13 +198,13 @@ class Decoders {
                 instance.things = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Things"])
                 return instance
             }
-			
 
-			// Decoder for [Observation]
+
+            // Decoder for [Observation]
             Decoders.addDecoder(clazz: [Observation].self) { (source: AnyObject) -> [Observation] in
                 return Decoders.decode(clazz: [Observation].self, source: source)
             }
-			// Decoder for Observation
+            // Decoder for Observation
             Decoders.addDecoder(clazz: Observation.self) { (source: AnyObject) -> Observation in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Observation()
@@ -213,13 +219,13 @@ class Decoders {
                 instance.sensor = Decoders.decodeOptional(clazz: Sensor.self, source: sourceDictionary["Sensor"])
                 return instance
             }
-			
 
-			// Decoder for [ObservedProperty]
+
+            // Decoder for [ObservedProperty]
             Decoders.addDecoder(clazz: [ObservedProperty].self) { (source: AnyObject) -> [ObservedProperty] in
                 return Decoders.decode(clazz: [ObservedProperty].self, source: source)
             }
-			// Decoder for ObservedProperty
+            // Decoder for ObservedProperty
             Decoders.addDecoder(clazz: ObservedProperty.self) { (source: AnyObject) -> ObservedProperty in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = ObservedProperty()
@@ -231,13 +237,13 @@ class Decoders {
                 instance.datastreams = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Datastreams"])
                 return instance
             }
-			
 
-			// Decoder for [Sensor]
+
+            // Decoder for [Sensor]
             Decoders.addDecoder(clazz: [Sensor].self) { (source: AnyObject) -> [Sensor] in
                 return Decoders.decode(clazz: [Sensor].self, source: source)
             }
-			// Decoder for Sensor
+            // Decoder for Sensor
             Decoders.addDecoder(clazz: Sensor.self) { (source: AnyObject) -> Sensor in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Sensor()
@@ -248,13 +254,13 @@ class Decoders {
                 instance.observations = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Observations"])
                 return instance
             }
-			
 
-			// Decoder for [Thing]
+
+            // Decoder for [Thing]
             Decoders.addDecoder(clazz: [Thing].self) { (source: AnyObject) -> [Thing] in
                 return Decoders.decode(clazz: [Thing].self, source: source)
             }
-			// Decoder for Thing
+            // Decoder for Thing
             Decoders.addDecoder(clazz: Thing.self) { (source: AnyObject) -> Thing in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Thing()
@@ -266,7 +272,6 @@ class Decoders {
                 instance.datastreams = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["Datastreams"])
                 return instance
             }
-			
         }
     }
 }

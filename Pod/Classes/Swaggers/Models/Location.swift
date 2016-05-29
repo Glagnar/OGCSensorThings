@@ -9,7 +9,6 @@ import Foundation
 
 
 public class Location: JSONEncodable {
-
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var iotId: AnyObject?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
@@ -21,7 +20,6 @@ public class Location: JSONEncodable {
     /** The absolute geographical position of the location. This is generally the GeoJSON geometry object. */
     public var geometry: String?
     public var things: [Thing]?
-    
 
     public init() {}
 

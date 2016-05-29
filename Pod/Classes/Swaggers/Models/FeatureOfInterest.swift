@@ -9,7 +9,6 @@ import Foundation
 
 
 public class FeatureOfInterest: JSONEncodable {
-
     /** ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type. */
     public var iotId: AnyObject?
     /** Self-Link is the absolute URL of an entity which is unique among all other entities. */
@@ -21,7 +20,6 @@ public class FeatureOfInterest: JSONEncodable {
     /** The absolute geographical position of the feature of interest. This is generally the GeoJSON geometry object. In the case of the thing itself being the feature of interest, this geometry property is inherited from the thing entity by interpolating the geometries in the location entities. */
     public var geometry: String?
     public var observations: [Observation]?
-    
 
     public init() {}
 
