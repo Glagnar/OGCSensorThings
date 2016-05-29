@@ -132,7 +132,7 @@ class Decoders {
             Decoders.addDecoder(clazz: Datastream.self) { (source: AnyObject) -> Datastream in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Datastream()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 instance.description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Description"])
@@ -151,7 +151,7 @@ class Decoders {
             Decoders.addDecoder(clazz: Entity.self) { (source: AnyObject) -> Entity in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Entity()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 return instance
@@ -166,7 +166,7 @@ class Decoders {
             Decoders.addDecoder(clazz: FeatureOfInterest.self) { (source: AnyObject) -> FeatureOfInterest in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = FeatureOfInterest()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 instance.description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Description"])
@@ -184,7 +184,7 @@ class Decoders {
             Decoders.addDecoder(clazz: Location.self) { (source: AnyObject) -> Location in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Location()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 instance.time = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["Time"])
@@ -202,7 +202,7 @@ class Decoders {
             Decoders.addDecoder(clazz: Observation.self) { (source: AnyObject) -> Observation in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Observation()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 instance.time = Decoders.decodeOptional(clazz: NSDate.self, source: sourceDictionary["Time"])
@@ -223,7 +223,7 @@ class Decoders {
             Decoders.addDecoder(clazz: ObservedProperty.self) { (source: AnyObject) -> ObservedProperty in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = ObservedProperty()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 instance.URI = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["URI"])
@@ -241,7 +241,7 @@ class Decoders {
             Decoders.addDecoder(clazz: Sensor.self) { (source: AnyObject) -> Sensor in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Sensor()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 instance.metadata = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["Metadata"])
@@ -258,7 +258,7 @@ class Decoders {
             Decoders.addDecoder(clazz: Thing.self) { (source: AnyObject) -> Thing in
                 let sourceDictionary = source as! [NSObject:AnyObject]
                 let instance = Thing()
-                instance.iotId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.id"])
+                instance.iotId = Decoders.decodeOptional(clazz: AnyObject.self, source: sourceDictionary["@iot.id"])
                 instance.iotSelfLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.selfLink"])
                 instance.iotNavigationLink = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["@iot.navigationLink"])
                 instance.description = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["description"])
