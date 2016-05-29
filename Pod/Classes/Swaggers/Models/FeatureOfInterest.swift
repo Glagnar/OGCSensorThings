@@ -9,6 +9,7 @@ import Foundation
 
 
 public class FeatureOfInterest: JSONEncodable {
+
     /** The description about the FeatureOfInterest. */
     public var description: String?
     /** The encoding type of the feature property. Its value is one of the ValueCode enumeration (see Table 8-6 for the available ValueCode, GeoJSON).  */
@@ -19,6 +20,7 @@ public class FeatureOfInterest: JSONEncodable {
     public var observations: [Observation]?
     /** link to related entities */
     public var observationsiotNavigationLink: String?
+    
 
     public init() {}
 

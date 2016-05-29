@@ -75,7 +75,7 @@ class AlamofireRequestBuilder<T>: RequestBuilder<T> {
             request.authenticate(usingCredential: credential)
         }
 
-        request.validate().responseJSON(options: .AllowFragments) { response in
+        request.responseJSON(options: .AllowFragments) { response in
             managerStore.removeValueForKey(managerId)
 
             if response.result.isFailure {

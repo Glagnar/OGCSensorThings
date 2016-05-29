@@ -9,9 +9,11 @@ import Foundation
 
 
 public class DatastreamsResponse: JSONEncodable {
+
     public var iotCount: Double?
     public var value: [Datastream]?
     public var iotNextLink: String?
+    
 
     public init() {}
 

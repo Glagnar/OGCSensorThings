@@ -18,14 +18,6 @@ extension Int: JSONEncodable {
     func encodeToJSON() -> AnyObject { return self }
 }
 
-extension Int32: JSONEncodable {
-    func encodeToJSON() -> AnyObject { return NSNumber(int: self) }
-}
-
-extension Int64: JSONEncodable {
-    func encodeToJSON() -> AnyObject { return NSNumber(longLong: self) }
-}
-
 extension Double: JSONEncodable {
     func encodeToJSON() -> AnyObject { return self }
 }
