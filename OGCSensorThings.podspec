@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "OGCSensorThings"
-  s.version      = "0.2.4"
+  s.version      = "1.2.1"
   s.summary      = "Easily consume OGCSensorThings services."
 
   s.description  = <<-DESC

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.0.2",
+        "version": "0.2.0",
         "title": "ALMANAC Cloud API"
     },
     "paths": {
@@ -35,7 +35,7 @@
                         "in": "query",
                         "description": "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -100,7 +100,7 @@
                         "in": "query",
                         "description": "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -165,7 +165,7 @@
                         "in": "query",
                         "description": "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -230,7 +230,7 @@
                         "in": "query",
                         "description": "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -295,7 +295,7 @@
                         "in": "query",
                         "description": "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry%20st_within(POLYGON%20((30%2010,%2010%2020,%2020%2040,%2040%2040,%2030%2010)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -360,7 +360,7 @@
                         "in": "query",
                         "description": "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -425,7 +425,7 @@
                         "in": "query",
                         "description": "A URI with a <strong>$filter</strong> query option identifies a subset of the entries from the collection of entries identified by the resource path of the URI. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the <strong>$filter</strong>. The value of the <strong>$filter</strong> option is a Boolean expression. The expression language that is used in $filter operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or datetime values represented as datetime'ISO 8601 time string'.<br/><ul><li><strong>Example:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=ResultValue%20lt%2010.00</address> returns all Observations whose ResultValue is less than 10.00. In addition, users may use the properties of linked entities in the $filter predicate. The following are examples of the possible uses of the $filter in the data model of the SensorThings service.</li><li><strong>Example 1:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Observations?$filter=Datastream/ObservedProperty/UnitOfMeasurement%20eq%20'Celsius'</address> returns all Observations whose UnitOfMeasurement (a property of ObservedProperty) is 'Celsius'.</li><strong>Example 2:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Locations/Geometry st_within(POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10)))</address> returns Things whose current or past locations were in the polygon defined in the Well-Known Text (WKT).</li><li><strong>Example 3:</strong> <address>http://demo.student.geocens.ca:8080/SensorThings_V1.0/Things?$filter=Datastreams/Observations/FeatureOfInterest/ID%20eq20'FOI_1'%20and%20Datastreams/Observations/Time%20ge%20datetime'2010-06-01T00:00:00Z'%20and%20Datastreams/Observations/Time%20le%20datetime'2010-07-01T00:00:00Z'</address> returns Things that have any observations on a feature of interest with a unique identifier equals to 'FOI_1' in June 2010.</li></ul>For more information on available query functions, look at: http://ogc-iot.github.io/ogc-iot-api/api.html#queryFunctions. Instead, for built-in filter operations look at http://ogc-iot.github.io/ogc-iot-api/api.html#filterOperations",
                         "required": false,
-                        "type": "integer"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -464,25 +464,21 @@
     "definitions": {
         "Entity": {
             "properties": {
-                "ID": {
+                "@iot.id": {
                     "type": "string",
                     "description": "ID is the system-generated identifier of an entity. ID is unique among the entities of the same entity type."
                 },
-                "Self-link": {
+                "@iot.selfLink": {
                     "type": "string",
                     "description": "Self-Link is the absolute URL of an entity which is unique among all other entities."
                 },
-                "Association-Link": {
-                    "type": "string",
-                    "description": "Association-Link is the relative URL showing the related entities in other entity types. Only the Self-Links of related entities are returned when resolving Association-Links."
-                },
-                "Navigation-Link": {
+                "@iot.navigationLink": {
                     "type": "string",
                     "description": "Navigation-Link is the relative URL that retrives content of related entities."
                 }
             },
             "required": [
-                "ID"
+                "@iot.id"
             ]
         },
         "Thing": {
@@ -492,7 +488,7 @@
                 },
                 {
                     "properties": {
-                        "Description": {
+                        "description": {
                             "type": "string",
                             "description": "This is the description of the thing entity. The content is open to accommodate changes to SensorML and to support other description languages."
                         },
