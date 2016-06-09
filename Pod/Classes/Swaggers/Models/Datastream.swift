@@ -26,11 +26,8 @@ public class Datastream: JSONEncodable {
     public var phenomenonTime: String?
     /** The temporal bounding box of the result times of all observations belonging to this Datastream. TM_Period (ISO 8601 Time Interval) */
     public var resultTime: String?
-    /** A Thing has zero-to-many Datastreams. A Datastream entity SHALL only link to a Thing as a collection of Observations . */
     public var thing: Thing?
-    /** The Observations in a Datastream are performed by one-and-only-one Sensor. One Sensor MAY produce zero-to-many Observations in different Datastreams. */
     public var sensor: Sensor?
-    /** The observations of a datastream SHALL observe the same observedProperty. The observations of different datastreams MAY observe the same observedProperty. */
     public var observedProperty: ObservedProperty?
     /** A datastream has zero-to-many observations. One observation SHALL occur in one and only one Datastream. */
     public var observations: [Observation]?

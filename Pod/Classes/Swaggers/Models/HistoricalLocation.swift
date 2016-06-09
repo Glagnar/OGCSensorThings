@@ -17,7 +17,6 @@ public class HistoricalLocation: JSONEncodable {
     public var time: String?
     /** A Location can have zero-to-many HistoricalLocations. One HistoricalLocation SHALL have one or many Locations. */
     public var locations: [Location]?
-    /** A HistoricalLocation has one-and-only-one Thing. One Thing MAY have zero-to-many HistoricalLocations.  */
     public var thing: Thing?
     /** link to related entities */
     public var locationsiotNavigationLink: String?
