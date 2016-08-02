@@ -53,7 +53,7 @@ public class DefaultAPI: APIBase {
   "Observations@iot.navigationLink" : "aeiou",
   "Observations" : [ {
     "result" : "aeiou",
-    "resultTime" : "2000-01-23T04:56:07.000+0000",
+    "resultTime" : "2000-01-23T04:56:07.000+00:00",
     "Datastream" : "",
     "@iot.selfLink" : "aeiou",
     "FeatureOfInterest" : {
@@ -67,7 +67,7 @@ public class DefaultAPI: APIBase {
     },
     "@iot.id" : "aeiou",
     "phenomenonTime" : "aeiou",
-    "validTime" : "2000-01-23T04:56:07.000+0000",
+    "validTime" : "2000-01-23T04:56:07.000+00:00",
     "FeatureOfInterest@iot.navigationLink" : "aeiou",
     "Datastream@iot.navigationLink" : "aeiou",
     "parameters" : "{}",
@@ -167,7 +167,7 @@ public class DefaultAPI: APIBase {
   "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
   "value" : [ {
     "result" : "aeiou",
-    "resultTime" : "2000-01-23T04:56:07.000+0000",
+    "resultTime" : "2000-01-23T04:56:07.000+00:00",
     "Datastream" : {
       "resultTime" : "aeiou",
       "@iot.selfLink" : "aeiou",
@@ -243,7 +243,7 @@ public class DefaultAPI: APIBase {
     },
     "@iot.id" : "aeiou",
     "phenomenonTime" : "aeiou",
-    "validTime" : "2000-01-23T04:56:07.000+0000",
+    "validTime" : "2000-01-23T04:56:07.000+00:00",
     "FeatureOfInterest@iot.navigationLink" : "aeiou",
     "Datastream@iot.navigationLink" : "aeiou",
     "parameters" : "{}",
@@ -325,7 +325,7 @@ public class DefaultAPI: APIBase {
     "Observations@iot.navigationLink" : "aeiou",
     "Observations" : [ {
       "result" : "aeiou",
-      "resultTime" : "2000-01-23T04:56:07.000+0000",
+      "resultTime" : "2000-01-23T04:56:07.000+00:00",
       "Datastream" : "",
       "@iot.selfLink" : "aeiou",
       "FeatureOfInterest" : {
@@ -339,7 +339,7 @@ public class DefaultAPI: APIBase {
       },
       "@iot.id" : "aeiou",
       "phenomenonTime" : "aeiou",
-      "validTime" : "2000-01-23T04:56:07.000+0000",
+      "validTime" : "2000-01-23T04:56:07.000+00:00",
       "FeatureOfInterest@iot.navigationLink" : "aeiou",
       "Datastream@iot.navigationLink" : "aeiou",
       "parameters" : "{}",
@@ -476,7 +476,7 @@ public class DefaultAPI: APIBase {
     "Observations@iot.navigationLink" : "aeiou",
     "Observations" : [ {
       "result" : "aeiou",
-      "resultTime" : "2000-01-23T04:56:07.000+0000",
+      "resultTime" : "2000-01-23T04:56:07.000+00:00",
       "Datastream" : {
         "resultTime" : "aeiou",
         "@iot.selfLink" : "aeiou",
@@ -544,7 +544,7 @@ public class DefaultAPI: APIBase {
       "FeatureOfInterest" : "",
       "@iot.id" : "aeiou",
       "phenomenonTime" : "aeiou",
-      "validTime" : "2000-01-23T04:56:07.000+0000",
+      "validTime" : "2000-01-23T04:56:07.000+00:00",
       "FeatureOfInterest@iot.navigationLink" : "aeiou",
       "Datastream@iot.navigationLink" : "aeiou",
       "parameters" : "{}",
@@ -668,7 +668,7 @@ public class DefaultAPI: APIBase {
           "Observations@iot.navigationLink" : "aeiou",
           "Observations" : [ {
             "result" : "aeiou",
-            "resultTime" : "2000-01-23T04:56:07.000+0000",
+            "resultTime" : "2000-01-23T04:56:07.000+00:00",
             "Datastream" : "",
             "@iot.selfLink" : "aeiou",
             "FeatureOfInterest" : {
@@ -682,7 +682,7 @@ public class DefaultAPI: APIBase {
             },
             "@iot.id" : "aeiou",
             "phenomenonTime" : "aeiou",
-            "validTime" : "2000-01-23T04:56:07.000+0000",
+            "validTime" : "2000-01-23T04:56:07.000+00:00",
             "FeatureOfInterest@iot.navigationLink" : "aeiou",
             "Datastream@iot.navigationLink" : "aeiou",
             "parameters" : "{}",
@@ -830,7 +830,7 @@ public class DefaultAPI: APIBase {
         "Observations@iot.navigationLink" : "aeiou",
         "Observations" : [ {
           "result" : "aeiou",
-          "resultTime" : "2000-01-23T04:56:07.000+0000",
+          "resultTime" : "2000-01-23T04:56:07.000+00:00",
           "Datastream" : "",
           "@iot.selfLink" : "aeiou",
           "FeatureOfInterest" : {
@@ -844,7 +844,7 @@ public class DefaultAPI: APIBase {
           },
           "@iot.id" : "aeiou",
           "phenomenonTime" : "aeiou",
-          "validTime" : "2000-01-23T04:56:07.000+0000",
+          "validTime" : "2000-01-23T04:56:07.000+00:00",
           "FeatureOfInterest@iot.navigationLink" : "aeiou",
           "Datastream@iot.navigationLink" : "aeiou",
           "parameters" : "{}",
@@ -967,7 +967,7 @@ public class DefaultAPI: APIBase {
   "@iot.count" : 1.3579000000000001069366817318950779736042022705078125,
   "value" : [ {
     "result" : "aeiou",
-    "resultTime" : "2000-01-23T04:56:07.000+0000",
+    "resultTime" : "2000-01-23T04:56:07.000+00:00",
     "Datastream" : {
       "resultTime" : "aeiou",
       "@iot.selfLink" : "aeiou",
@@ -1043,7 +1043,7 @@ public class DefaultAPI: APIBase {
     },
     "@iot.id" : "aeiou",
     "phenomenonTime" : "aeiou",
-    "validTime" : "2000-01-23T04:56:07.000+0000",
+    "validTime" : "2000-01-23T04:56:07.000+00:00",
     "FeatureOfInterest@iot.navigationLink" : "aeiou",
     "Datastream@iot.navigationLink" : "aeiou",
     "parameters" : "{}",
@@ -1150,7 +1150,7 @@ public class DefaultAPI: APIBase {
       "Observations@iot.navigationLink" : "aeiou",
       "Observations" : [ {
         "result" : "aeiou",
-        "resultTime" : "2000-01-23T04:56:07.000+0000",
+        "resultTime" : "2000-01-23T04:56:07.000+00:00",
         "Datastream" : "",
         "@iot.selfLink" : "aeiou",
         "FeatureOfInterest" : {
@@ -1164,7 +1164,7 @@ public class DefaultAPI: APIBase {
         },
         "@iot.id" : "aeiou",
         "phenomenonTime" : "aeiou",
-        "validTime" : "2000-01-23T04:56:07.000+0000",
+        "validTime" : "2000-01-23T04:56:07.000+00:00",
         "FeatureOfInterest@iot.navigationLink" : "aeiou",
         "Datastream@iot.navigationLink" : "aeiou",
         "parameters" : "{}",
@@ -1325,7 +1325,7 @@ public class DefaultAPI: APIBase {
       "Observations@iot.navigationLink" : "aeiou",
       "Observations" : [ {
         "result" : "aeiou",
-        "resultTime" : "2000-01-23T04:56:07.000+0000",
+        "resultTime" : "2000-01-23T04:56:07.000+00:00",
         "Datastream" : "",
         "@iot.selfLink" : "aeiou",
         "FeatureOfInterest" : {
@@ -1339,7 +1339,7 @@ public class DefaultAPI: APIBase {
         },
         "@iot.id" : "aeiou",
         "phenomenonTime" : "aeiou",
-        "validTime" : "2000-01-23T04:56:07.000+0000",
+        "validTime" : "2000-01-23T04:56:07.000+00:00",
         "FeatureOfInterest@iot.navigationLink" : "aeiou",
         "Datastream@iot.navigationLink" : "aeiou",
         "parameters" : "{}",
@@ -1490,7 +1490,7 @@ public class DefaultAPI: APIBase {
       "Observations@iot.navigationLink" : "aeiou",
       "Observations" : [ {
         "result" : "aeiou",
-        "resultTime" : "2000-01-23T04:56:07.000+0000",
+        "resultTime" : "2000-01-23T04:56:07.000+00:00",
         "Datastream" : "",
         "@iot.selfLink" : "aeiou",
         "FeatureOfInterest" : {
@@ -1504,7 +1504,7 @@ public class DefaultAPI: APIBase {
         },
         "@iot.id" : "aeiou",
         "phenomenonTime" : "aeiou",
-        "validTime" : "2000-01-23T04:56:07.000+0000",
+        "validTime" : "2000-01-23T04:56:07.000+00:00",
         "FeatureOfInterest@iot.navigationLink" : "aeiou",
         "Datastream@iot.navigationLink" : "aeiou",
         "parameters" : "{}",
