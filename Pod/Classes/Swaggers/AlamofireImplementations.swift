@@ -90,7 +90,7 @@ class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
         switch T.self {
         case is NSData.Type:
-            validatedRequest.responseData({ (dataResponse) in
+            validatedRequest.responseData { (dataResponse) in
                 cleanupRequest()
 
                 if (dataResponse.result.isFailure) {
@@ -108,7 +108,7 @@ class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                     ),
                     error: nil
                 )
-            })
+            } 
         default:
             validatedRequest.responseJSON(options: .AllowFragments) { response in
                 cleanupRequest()

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "OGCSensorThings"
-  s.version      = "2.1.4"
+  s.version      = "2.1.5"
   s.summary      = "Easily consume OGCSensorThings services."
 
   s.description  = <<-DESC
@@ -19,5 +19,4 @@ This POD is made possible through the efforts of Dario Bonino, and funded by the
 
   s.source_files = 'Pod/Classes/**/*.swift'
   s.dependency "Alamofire"
-
 end
